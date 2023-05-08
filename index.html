@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+
+
+</head>
+<body>
+<div>
+  <div>
+    <p> This is a template page to showcase different images!</p>
+  </div>
+  <div>
+    <img id="Pony" src="autumn.jpg" sizes="">
+    <script type="text/javascript">
+      const imgToChange = document.getElementById("Pony");
+      const query = window.location.search;
+      const parsedQuery = new URLSearchParams(query);
+
+      imgToChange.src = parsedQuery.get("pony") + ".jpg";
+
+    </script>
+  </div>
+</div>
+
+</body>
+</html>
