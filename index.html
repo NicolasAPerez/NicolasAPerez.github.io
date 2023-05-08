@@ -2,26 +2,42 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <title>OS 2000s</title>
+  <link rel="stylesheet" href="style.css">
 
-
+  <script src="WindowsBar.js"></script>
 </head>
 <body>
-<div>
-  <div>
-    <p> This is a template page to showcase different images!</p>
-  </div>
-  <div>
-    <img id="Pony" src="autumn.jpg" sizes="">
-    <script type="text/javascript">
-      const imgToChange = document.getElementById("Pony");
-      const query = window.location.search;
-      const parsedQuery = new URLSearchParams(query);
 
-      imgToChange.src = "/img/" + (parsedQuery.get("pony") || "autumn") + ".jpg";
+<div class="WindowsBar">
+  <div class="buttonMargin"></div>
+  <button type="button" class="WindowSel">
+    <div class="buttonIconHolder">
+      <img class="buttonIcon" src="OS_img/person.png">
 
-    </script>
+    </div>
+    <p class="buttonTitle">
+      About me
+    </p>
+
+  </button>
+  <button type="button" class="WindowSel">
+
+  </button>
+  <button type="button" class="WindowSel">
+
+  </button>
+  <button type="button" class="WindowSel">
+
+  </button>
+
+  <div class="WindowsInfo">
+    <p id="datetime">
+
+    </p>
+
   </div>
+
 </div>
 
 </body>
