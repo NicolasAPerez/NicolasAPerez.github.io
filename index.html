@@ -18,7 +18,7 @@
       const query = window.location.search;
       const parsedQuery = new URLSearchParams(query);
 
-      imgToChange.src = parsedQuery.get("pony") + ".jpg";
+      imgToChange.src = "/img/" + (parsedQuery.get("pony") || "autumn") + ".jpg";
 
     </script>
   </div>
