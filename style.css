@@ -1,8 +1,32 @@
+
+/* PAGE COLOR SCHEME */
+
+:root {
+    --main_color: #8bc34a;
+    --main_BG_color: #7dad42;
+    --main_border_color: #709c3d;
+    --button_main: #aed581;
+    --button_highlight: #c5e1a5;
+    --button_shadow: #a4c779;
+
+    --text_color: white;
+    --text_shadow: black;
+}
+
+/*Default Values for the page*/
+/*#region*/
+
 html, body, div, button {
     margin: 0;
     border-width: 0;
 }
+p {
+    color: var(--text_color);
+    font-family: "Roboto Light", sans-serif;
+    font-size: clamp(10px, 3vw, 200%);
 
+    -webkit-font-smoothing: antialiased;
+}
 
 html {
     height: 100%;
@@ -13,10 +37,13 @@ body {
     background-color: black;
 
 }
+/*endregion*/
 
+/*Button Bar Values*/
+/*region*/
 
 div.WindowsBar {
-    background-color: #8bc34a;
+    background-color: var(--main_color);
     position: fixed;
     bottom: 0;
     width: 100%;
@@ -24,25 +51,28 @@ div.WindowsBar {
     display: flex;
     align-items: center;
 
+    border-top: 3px outset var(--main_BG_color);
+
+
 }
+
 div.buttonMargin {
     width: 1vw;
 }
 
-div.WindowsInfo {
+div.BarOSInfo {
     height: 8vh;
     width: 15%;
     position: fixed;
     right: 0;
-    background-color: #7dad42;
-
+    background-color: var(--main_BG_color);
 
 
     border-width: 6px;
     border-left-style: groove;
     border-bottom-left-radius: 2vw;
     border-top-left-radius: 2vw;
-    border-left-color: #709c3d;
+    border-left-color: var(--main_border_color);
 
     display: flex;
     align-items: center;
@@ -51,19 +81,19 @@ div.WindowsInfo {
 }
 
 #datetime {
-    color: white;
-    font-family: "Calisto MT", serif;
-    font-size: clamp(10px, 2vw, 36px);
-    text-shadow: black 0px 0px 1px;
+    color: var(--text_color);
+
+    font-size: clamp(10px, 2vw, 30px);
+
 }
 
-button.WindowSel {
-    background-color: #aed581;
+button.ButtonBarSel {
+    background-color: var(--button_main);
     border-width: 6px;
-    border-bottom-color: #a4c779;
-    border-right-color: #a4c779;
-    border-left-color: #c5e1a5;
-    border-top-color: #c5e1a5;
+    border-bottom-color: var(--button_shadow);
+    border-right-color: var(--button_shadow);
+    border-left-color: var(--button_highlight);
+    border-top-color: var(--button_highlight);
 
     margin-left: 0.5vw;
     width: 15%;
@@ -72,22 +102,74 @@ button.WindowSel {
     display: flex;
     align-items: center;
 }
+
 div.buttonIconHolder {
-    padding-left: 5%;
-    padding-right: 10%;
+    padding-left: min(5%, 10px);
+    padding-right: min(5%, 10px);
 
     height: 75%;
     width: 25%;
 
 }
+
 img.buttonIcon {
     max-height: 100%;
 
 }
-p.buttonTitle {
-    color: white;
-    font-family: "Calisto MT", serif;
-    font-size: clamp(10px, 2vw, 36px);
+/*endregion*/
+
+/*Window Opened Values*/
+/*region*/
+
+div.WindowTotal {
+    width: 75%;
+    height: 80%;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+
+    background-color: white;
+    border-color: var(--main_border_color);
+    border-style: none solid solid solid;
+    border-width: 5px;
+
+}
+div.WindowTopOptions{
+    width: 100%;
+    height: 5%;
+    background-color: var(--main_border_color);
+
+    display: flex;
+    align-items: center;
+
+}
+div.WindowContent{
 
 }
 
+button.CloseWindow{
+    position: absolute;
+    right: 0;
+    aspect-ratio: 1/1;
+    height: 3%;
+    
+    background-color: #b0120a;
+    
+    border-width: 3px;
+    border-color: #de140d;
+    border-radius: 40%;
+}
+
+button.MinimizeWindow{
+    position: absolute;
+    right: 5%;
+    aspect-ratio: 1/1;
+    height: 3%;
+
+    background-color: #558b2f;
+
+    border-width: 3px;
+    border-color: #9ccc65;
+    border-radius: 40%;
+}
+/*endregion*/
