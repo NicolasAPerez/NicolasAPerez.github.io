@@ -101,20 +101,26 @@ button.ButtonBarSel {
 
     display: flex;
     align-items: center;
+    overflow: hidden;
 }
 
 div.buttonIconHolder {
     padding-left: min(5%, 10px);
-    padding-right: min(5%, 10px);
+    padding-right: min(1%, 10px);
 
     height: 75%;
-    width: 25%;
+    aspect-ratio: 1/1;
+
 
 }
 
 img.buttonIcon {
     max-height: 100%;
 
+}
+
+p.buttonTitle {
+    width: 75%;
 }
 /*endregion*/
 
@@ -162,7 +168,7 @@ button.CloseWindow{
 
 button.MinimizeWindow{
     position: absolute;
-    right: 5%;
+    right: 40px;
     aspect-ratio: 1/1;
     height: 3%;
 
