@@ -23,7 +23,7 @@ html, body, div, button {
 p {
     color: var(--text_color);
     font-family: "Roboto Light", sans-serif;
-    font-size: clamp(10px, 3vw, 200%);
+    font-size: clamp(10px, 3vmin, 200%);
 
     -webkit-font-smoothing: antialiased;
 }
@@ -83,7 +83,8 @@ div.BarOSInfo {
 #datetime {
     color: var(--text_color);
 
-    font-size: clamp(10px, 2vw, 30px);
+    font-size: clamp(10px, 2vmin, 30px);
+    user-select: none;
 
 }
 
@@ -102,11 +103,12 @@ button.ButtonBarSel {
     display: flex;
     align-items: center;
     overflow: hidden;
+
 }
 
 div.buttonIconHolder {
-    padding-left: min(5%, 10px);
-    padding-right: min(1%, 10px);
+    margin-left: min(5%, 10px);
+    margin-right: min(1%, 10px);
 
     height: 75%;
     aspect-ratio: 1/1;
@@ -116,11 +118,13 @@ div.buttonIconHolder {
 
 img.buttonIcon {
     max-height: 100%;
+    user-select: none;
 
 }
 
 p.buttonTitle {
     width: 75%;
+    text-align: left;
 }
 /*endregion*/
 
@@ -147,10 +151,16 @@ div.WindowTopOptions{
 
     display: flex;
     align-items: center;
+    overflow: hidden;
 
 }
 div.WindowContent{
 
+}
+p.windowTitle{
+    width: 75%;
+    text-align: left;
+    user-select: none;
 }
 
 button.CloseWindow{
@@ -178,4 +188,21 @@ button.MinimizeWindow{
     border-color: #9ccc65;
     border-radius: 40%;
 }
+/*endregion*/
+
+/*OS Values*/
+/*region*/
+
+#display {
+    height: 92vh;
+
+
+    background-color: white;
+    background-image: url("/OS_img/Background.png");
+    image-rendering: pixelated;
+
+    background-size: cover;
+    background-position: bottom;
+}
+
 /*endregion*/
