@@ -2,12 +2,12 @@
 /* PAGE COLOR SCHEME */
 
 :root {
-    --main_color: #8bc34a;
-    --main_BG_color: #7dad42;
-    --main_border_color: #709c3d;
-    --button_main: #aed581;
-    --button_highlight: #c5e1a5;
-    --button_shadow: #a4c779;
+    --main_color: #6c4ac3;
+    --main_BG_color: #5a3da4;
+    --main_border_color: #4b348a;
+    --button_main: #937fbb;
+    --button_highlight: #aa96d0;
+    --button_shadow: #8675b6;
 
     --text_color: white;
     --text_shadow: black;
@@ -85,6 +85,7 @@ div.BarOSInfo {
 
     font-size: clamp(10px, 2vmin, 30px);
     user-select: none;
+    text-align: center;
 
 }
 
@@ -118,6 +119,7 @@ div.buttonIconHolder {
 
 img.buttonIcon {
     max-height: 100%;
+
     user-select: none;
 
 }
@@ -204,5 +206,25 @@ button.MinimizeWindow{
     background-size: cover;
     background-position: bottom;
 }
+
+button.ShortcutHolder {
+
+    height: 125px;
+    width: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: transparent;
+}
+img.ShortcutIcon {
+    image-rendering: auto;
+    aspect-ratio: 1/1;
+    height: 66%;
+}
+p.ShortcutTitle {
+    margin: 0;
+    font-size: 16px;
+}
+
 
 /*endregion*/

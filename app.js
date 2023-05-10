@@ -49,14 +49,38 @@ function createWindow(parentDiv, idName, content){
     
     createBarButton(document.getElementsByClassName("WindowsBar")[0],idName, idName);
     currWindow.windowID.id = idName;
-
+    
+    currWindow.windowID.querySelector(".WindowTopOptions").addEventListener("mousedown", (event) =>{
+        if (event.button === 0){
+            let window = event.target.parentElement;
+            if (window.className !== "WindowTotal"){
+                window = window.parentElement;
+            }
+            let left = window.style.left;
+            let top = window.style.top;
+            left = parseInt(left) || 0;
+            top = parseInt(top) || 0;
+            left += event.movementX;
+            top += event.movementY;
+            
+            window.style.left = left + "px";
+            window.style.top = top + "px";
+        }
+    })
     currWindow.windowID.querySelector(".buttonIcon").src = `OS_img/${idName}.png`;
     currWindow.windowID.querySelector(".windowTitle").innerHTML = camelCaseToName(idName);
     currWindow.windowID.querySelector(".MinimizeWindow").setAttribute("onclick", `toggleVisible('${idName}')`);
     currWindow.windowID.querySelector(".CloseWindow").setAttribute("onclick", `closeWindow('${idName}')`);
+}
+
+function createShortcut(idName, content){
+    let shortcut = document.getElementById("shortcut").content.firstElementChild.cloneNode(true);
+    document.getElementById("display").appendChild(shortcut);
     
-    
-    
+    shortcut.querySelector(".ShortcutIcon").src = `OS_img/${idName}.png`;
+    shortcut.querySelector(".ShortcutTitle").innerHTML = camelCaseToName(idName);
+    shortcut.setAttribute("onclick", `openWindow('${idName}', '${content}')`);
+   
 }
 
 
@@ -64,6 +88,12 @@ function toggleVisible(id){
     let window = appWindows.get(id).windowID;
     window.hidden = !window.hidden;
     
+}
+
+function openWindow(id, content){
+    if (!appWindows.has(id)){
+        createWindow(document.getElementById("display"), id, null);
+    }
 }
 function closeWindow(id){
     if (appWindows.has(id)){
@@ -74,13 +104,21 @@ function closeWindow(id){
     }
 }
 
+function moveWindow(event){
+    
+    
+    
+}
+
 document.addEventListener("DOMContentLoaded", (event)=>{
     
-    createWindow(document.getElementById("display"), "AboutMe", null);
-
+    createShortcut("AboutMe", null)
+    
     let clock = document.getElementById("datetime");
     updateClock(clock);
     updater = setInterval(updateClock, 1000, clock);
+    
+    
 
 
 });
