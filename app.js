@@ -3,7 +3,7 @@ let updater;
 const version = "Alpha";
 const appWindows = new Map();
 
-
+let movingWindow;
 
 function updateClock(element){
     date = new Date();
@@ -49,9 +49,17 @@ function createWindow(parentDiv, idName, content){
     
     createBarButton(document.getElementsByClassName("WindowsBar")[0],idName, idName);
     currWindow.windowID.id = idName;
+    currWindow.windowID.style.top = "5px";
+    currWindow.windowID.style.left = "5px";
     
     currWindow.windowID.querySelector(".WindowTopOptions").addEventListener("mousedown", (event) =>{
-        currWindow.windowID.addEventListener("mousemove", moveWindow);
+        window.addEventListener("mousemove", moveWindow);
+        appWindows.get(idName).mouseRelX = event.clientX - parseInt(event.currentTarget.parentElement.style.left);
+        appWindows.get(idName).mouseRelY = event.clientY - parseInt(event.currentTarget.parentElement.style.top);
+        
+        if (!movingWindow){
+            movingWindow = idName;
+        }
 
     })
     
@@ -81,6 +89,7 @@ function toggleVisible(id){
 function openWindow(id, content){
     if (!appWindows.has(id)){
         createWindow(document.getElementById("display"), id, null);
+        
     }
 }
 function closeWindow(id){
@@ -94,16 +103,12 @@ function closeWindow(id){
 
 function moveWindow(event){
     if (event.button === 0){
-        let window = event.currentTarget;
+        let window = document.getElementById(movingWindow);
         if (window.className === "WindowTotal") {
 
 
-            let left = window.style.left;
-            let top = window.style.top;
-            left = parseInt(left) || 0;
-            top = parseInt(top) || 0;
-            left += event.movementX;
-            top += event.movementY;
+            let left = event.clientX - appWindows.get(movingWindow).mouseRelX;
+            let top = event.clientY - appWindows.get(movingWindow).mouseRelY;
 
             window.style.left = left + "px";
             window.style.top = top + "px";
@@ -112,9 +117,10 @@ function moveWindow(event){
 }
 
 document.addEventListener("mouseup", (event) =>{
-    for (let [key, value] of appWindows) {
-        value.windowID.removeEventListener("mousemove", moveWindow);
-    }
+    
+    window.removeEventListener("mousemove", moveWindow);
+    
+    movingWindow = "";
     
 })
 
