@@ -51,22 +51,10 @@ function createWindow(parentDiv, idName, content){
     currWindow.windowID.id = idName;
     
     currWindow.windowID.querySelector(".WindowTopOptions").addEventListener("mousedown", (event) =>{
-        if (event.button === 0){
-            let window = event.target.parentElement;
-            if (window.className !== "WindowTotal"){
-                window = window.parentElement;
-            }
-            let left = window.style.left;
-            let top = window.style.top;
-            left = parseInt(left) || 0;
-            top = parseInt(top) || 0;
-            left += event.movementX;
-            top += event.movementY;
-            
-            window.style.left = left + "px";
-            window.style.top = top + "px";
-        }
+        currWindow.windowID.addEventListener("mousemove", moveWindow);
+
     })
+    
     currWindow.windowID.querySelector(".buttonIcon").src = `OS_img/${idName}.png`;
     currWindow.windowID.querySelector(".windowTitle").innerHTML = camelCaseToName(idName);
     currWindow.windowID.querySelector(".MinimizeWindow").setAttribute("onclick", `toggleVisible('${idName}')`);
@@ -105,10 +93,30 @@ function closeWindow(id){
 }
 
 function moveWindow(event){
-    
-    
-    
+    if (event.button === 0){
+        let window = event.currentTarget;
+        if (window.className === "WindowTotal") {
+
+
+            let left = window.style.left;
+            let top = window.style.top;
+            left = parseInt(left) || 0;
+            top = parseInt(top) || 0;
+            left += event.movementX;
+            top += event.movementY;
+
+            window.style.left = left + "px";
+            window.style.top = top + "px";
+        }
+    }
 }
+
+document.addEventListener("mouseup", (event) =>{
+    for (let [key, value] of appWindows) {
+        value.windowID.removeEventListener("mousemove", moveWindow);
+    }
+    
+})
 
 document.addEventListener("DOMContentLoaded", (event)=>{
     
@@ -118,8 +126,6 @@ document.addEventListener("DOMContentLoaded", (event)=>{
     updateClock(clock);
     updater = setInterval(updateClock, 1000, clock);
     
-    
-
 
 });
 
