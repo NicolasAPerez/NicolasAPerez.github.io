@@ -2,6 +2,8 @@ let date;
 let updater;
 const version = "Alpha";
 const appWindows = new Map();
+let totalApps;
+let numAppsPerHeight = Math.floor((window.innerHeight - 100) / 125);
 
 let movingWindow;
 
@@ -34,6 +36,15 @@ function clampNum(minimum, base, maximum){
     return Math.min( Math.max(base, minimum), maximum);
 }
 
+function reorgZIndex(startingIndex){
+    appWindows.forEach( (value, key) =>{
+        let zInd = Number.parseInt(value.windowID.style.zIndex);
+        if (zInd > startingIndex){
+            value.windowID.style.zIndex = --zInd;
+        }
+    });
+}
+
 //Element Functions
 
 function createBarButton(parentDiv, idName, imageFile){
@@ -58,11 +69,16 @@ function createWindow(parentDiv, idName, content){
     currWindow.windowID.id = idName;
     currWindow.windowID.style.top = "5px";
     currWindow.windowID.style.left = "5px";
+    currWindow.windowID.style.zIndex = appWindows.size - 1;
 
     currWindow.windowID.querySelector(".WindowTopOptions").addEventListener("mousedown", (event) =>{
         window.addEventListener("mousemove", moveWindow);
         appWindows.get(idName).mouseRelX = event.clientX - parseInt(event.currentTarget.parentElement.style.left);
         appWindows.get(idName).mouseRelY = event.clientY - parseInt(event.currentTarget.parentElement.style.top);
+
+        reorgZIndex(Number.parseInt(appWindows.get(idName).windowID.style.zIndex));
+        appWindows.get(idName).windowID.style.zIndex = appWindows.size - 1;
+
 
         if (!movingWindow){
             movingWindow = idName;
@@ -79,10 +95,14 @@ function createWindow(parentDiv, idName, content){
 function createShortcut(idName, content){
     let shortcut = document.getElementById("shortcut").content.firstElementChild.cloneNode(true);
     document.getElementById("display").appendChild(shortcut);
+    shortcut.style.top = (totalApps % numAppsPerHeight * 125) + "px";
+    shortcut.style.left = (Math.floor(totalApps / numAppsPerHeight) * 100) + "px";
 
     shortcut.querySelector(".ShortcutIcon").src = `OS_img/${idName}.png`;
     shortcut.querySelector(".ShortcutTitle").innerHTML = camelCaseToName(idName);
     shortcut.setAttribute("onclick", `openWindow('${idName}', '${content}')`);
+
+    totalApps++;
 
 }
 
@@ -102,6 +122,7 @@ function openWindow(id, content){
 function closeWindow(id){
     if (appWindows.has(id)){
         let tempobj = appWindows.get(id);
+        reorgZIndex(Number.parseInt(tempobj.windowID.style.zIndex));
         tempobj.windowID.remove();
         tempobj.buttonID.remove();
         appWindows.delete(id);
@@ -119,7 +140,9 @@ function moveWindow(event){
             left = clampNum(0, left, window.innerWidth - pane.offsetWidth);
             top = clampNum(0, top, window.innerHeight - pane.querySelector(".WindowTopOptions").offsetHeight - document.querySelector(".WindowsBar").offsetHeight);
             pane.style.left = left + "px";
-            pane.style.top = top + "px";
+            pane.style.top = top + "px"
+
+
         }
     }
 }
@@ -133,9 +156,22 @@ document.addEventListener("mouseup", (event) =>{
 })
 
 document.addEventListener("DOMContentLoaded", (event)=>{
+    totalApps = 0;
+
+    //Insert Applications
     
-    createShortcut("AboutMe", null)
-    
+    createShortcut("AboutMe", null);
+    createShortcut("ContactMe", null);
+    createShortcut("Projects", null);
+    createShortcut("Resume", null);
+    createShortcut("SourceCode", null);
+
+
+    //Bar Z Index update
+
+    document.querySelector(".WindowsBar").style.zIndex = totalApps;
+
+    //Clock Functions
     let clock = document.getElementById("datetime");
     updateClock(clock);
     updater = setInterval(updateClock, 1000, clock);
