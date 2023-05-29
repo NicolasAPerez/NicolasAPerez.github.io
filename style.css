@@ -193,6 +193,12 @@ button.MinimizeWindow{
     border-color: #9ccc65;
     border-radius: 40%;
 }
+
+iframe.Application {
+    width: 100%;
+    height: 95%;
+    border: none;
+}
 /*endregion*/
 
 /*OS Values*/

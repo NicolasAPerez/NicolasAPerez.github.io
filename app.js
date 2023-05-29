@@ -55,8 +55,6 @@ function createBarButton(parentDiv, idName, imageFile){
     currWindow.buttonID.querySelector(".buttonIcon").src = `OS_img/${imageFile}.png`;
     currWindow.buttonID.querySelector(".buttonTitle").innerHTML = camelCaseToName(idName);
     currWindow.buttonID.setAttribute("onclick", `toggleVisible('${idName}')`);
-
-
 }
 
 function createWindow(parentDiv, idName, content){
@@ -75,10 +73,12 @@ function createWindow(parentDiv, idName, content){
         window.addEventListener("mousemove", moveWindow);
         appWindows.get(idName).mouseRelX = event.clientX - parseInt(event.currentTarget.parentElement.style.left);
         appWindows.get(idName).mouseRelY = event.clientY - parseInt(event.currentTarget.parentElement.style.top);
+        document.querySelectorAll(".Application").forEach( frame => {
+            frame.style.pointerEvents = "none";
+        });
 
         reorgZIndex(Number.parseInt(appWindows.get(idName).windowID.style.zIndex));
         appWindows.get(idName).windowID.style.zIndex = appWindows.size - 1;
-
 
         if (!movingWindow){
             movingWindow = idName;
@@ -86,6 +86,7 @@ function createWindow(parentDiv, idName, content){
 
     })
 
+    selectApp(idName, currWindow.windowID.querySelector(".Application"));
     currWindow.windowID.querySelector(".buttonIcon").src = `OS_img/${idName}.png`;
     currWindow.windowID.querySelector(".windowTitle").innerHTML = camelCaseToName(idName);
     currWindow.windowID.querySelector(".MinimizeWindow").setAttribute("onclick", `toggleVisible('${idName}')`);
@@ -106,7 +107,6 @@ function createShortcut(idName, content){
 
 }
 
-
 function toggleVisible(id){
     let window = appWindows.get(id).windowID;
     window.hidden = !window.hidden;
@@ -119,6 +119,7 @@ function openWindow(id, content){
 
     }
 }
+
 function closeWindow(id){
     if (appWindows.has(id)){
         let tempobj = appWindows.get(id);
@@ -141,15 +142,32 @@ function moveWindow(event){
             top = clampNum(0, top, window.innerHeight - pane.querySelector(".WindowTopOptions").offsetHeight - document.querySelector(".WindowsBar").offsetHeight);
             pane.style.left = left + "px";
             pane.style.top = top + "px"
-
-
         }
     }
 }
 
+function selectApp(id, iframe){
+    let totalSource = "/FrameApps/";
+
+    switch (id) {
+        case "Resume": {
+            totalSource += "Nicolas_Perez_Resume.pdf"
+            break;
+        }
+        default: {
+            totalSource += "Loading.gif"
+            iframe.draggable = "false";
+        }
+    }
+
+    iframe.src = totalSource;
+}
 document.addEventListener("mouseup", (event) =>{
     
     window.removeEventListener("mousemove", moveWindow);
+    document.querySelectorAll(".Application").forEach( frame => {
+        frame.style.pointerEvents = "auto";
+    });
     
     movingWindow = "";
     
@@ -165,6 +183,7 @@ document.addEventListener("DOMContentLoaded", (event)=>{
     createShortcut("Projects", null);
     createShortcut("Resume", null);
     createShortcut("SourceCode", null);
+    createShortcut("Minesweeper", null)
 
 
     //Bar Z Index update
