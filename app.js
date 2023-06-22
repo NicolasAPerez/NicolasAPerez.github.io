@@ -158,6 +158,10 @@ function selectApp(id, iframe){
             totalSource += "SpellboundDEMO/index.html"
             break;
         }
+        case "SwitchToNormal": {
+            window.location.href = "https://nicolasaperez.github.io/default"
+            return;
+        }
         default: {
             totalSource += "Loading.gif"
             iframe.draggable = "false";
@@ -181,7 +185,8 @@ document.addEventListener("DOMContentLoaded", (event)=>{
     totalApps = 0;
 
     //Insert Applications
-    
+
+    createShortcut("SwitchToNormal", null);
     createShortcut("AboutMe", null);
     createShortcut("ContactMe", null);
     createShortcut("Projects", null);
