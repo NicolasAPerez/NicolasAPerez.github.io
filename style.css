@@ -226,7 +226,7 @@ button.ShortcutHolder {
     background-color: transparent;
 }
 img.ShortcutIcon {
-    image-rendering: auto;
+    image-rendering: crisp-edges;
     aspect-ratio: 1/1;
     height: 66%;
 }

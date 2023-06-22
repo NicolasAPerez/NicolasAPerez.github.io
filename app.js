@@ -154,6 +154,10 @@ function selectApp(id, iframe){
             totalSource += "Nicolas_Perez_Resume.pdf"
             break;
         }
+        case "Spellbound": {
+            totalSource += "SpellboundDEMO/index.html"
+            break;
+        }
         default: {
             totalSource += "Loading.gif"
             iframe.draggable = "false";
@@ -183,7 +187,8 @@ document.addEventListener("DOMContentLoaded", (event)=>{
     createShortcut("Projects", null);
     createShortcut("Resume", null);
     createShortcut("SourceCode", null);
-    createShortcut("Minesweeper", null)
+    createShortcut("Minesweeper", null);
+    createShortcut("Spellbound", null);
 
 
     //Bar Z Index update
