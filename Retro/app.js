@@ -159,7 +159,7 @@ function selectApp(id, iframe){
             break;
         }
         case "SwitchToNormal": {
-            window.location.href = "https://nicolasaperez.github.io/default"
+            window.location.href = "https://nicolasaperez.github.io/"
             return;
         }
         default: {
