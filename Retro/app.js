@@ -52,7 +52,7 @@ function createBarButton(parentDiv, idName, imageFile){
     currWindow.buttonID = document.getElementById("button").content.firstElementChild.cloneNode(true);
     parentDiv.appendChild(currWindow.buttonID);
 
-    currWindow.buttonID.querySelector(".buttonIcon").src = `OS_img/${imageFile}.png`;
+    currWindow.buttonID.querySelector(".buttonIcon").src = `/OS_img/${imageFile}.png`;
     currWindow.buttonID.querySelector(".buttonTitle").innerHTML = camelCaseToName(idName);
     currWindow.buttonID.setAttribute("onclick", `toggleVisible('${idName}')`);
 }
@@ -87,7 +87,7 @@ function createWindow(parentDiv, idName, content){
     })
 
     selectApp(idName, currWindow.windowID.querySelector(".Application"));
-    currWindow.windowID.querySelector(".buttonIcon").src = `OS_img/${idName}.png`;
+    currWindow.windowID.querySelector(".buttonIcon").src = `/OS_img/${idName}.png`;
     currWindow.windowID.querySelector(".windowTitle").innerHTML = camelCaseToName(idName);
     currWindow.windowID.querySelector(".MinimizeWindow").setAttribute("onclick", `toggleVisible('${idName}')`);
     currWindow.windowID.querySelector(".CloseWindow").setAttribute("onclick", `closeWindow('${idName}')`);
@@ -99,7 +99,7 @@ function createShortcut(idName, content){
     shortcut.style.top = (totalApps % numAppsPerHeight * 125) + "px";
     shortcut.style.left = (Math.floor(totalApps / numAppsPerHeight) * 100) + "px";
 
-    shortcut.querySelector(".ShortcutIcon").src = `OS_img/${idName}.png`;
+    shortcut.querySelector(".ShortcutIcon").src = `/OS_img/${idName}.png`;
     shortcut.querySelector(".ShortcutTitle").innerHTML = camelCaseToName(idName);
     shortcut.setAttribute("onclick", `openWindow('${idName}', '${content}')`);
 
