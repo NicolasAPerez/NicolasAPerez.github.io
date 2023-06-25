@@ -151,15 +151,19 @@ function selectApp(id, iframe){
 
     switch (id) {
         case "Resume": {
-            totalSource += "Nicolas_Perez_Resume.pdf"
+            totalSource += "Nicolas_Perez_Resume.pdf";
             break;
         }
         case "Spellbound": {
-            totalSource += "SpellboundDEMO/index.html"
+            totalSource += "SpellboundDEMO/index.html";
+            break;
+        }
+        case "Minesweeper": {
+            totalSource += "Minesweeper/index.html";
             break;
         }
         case "SwitchToNormal": {
-            window.location.href = "https://nicolasaperez.github.io/"
+            window.location.href = "https://nicolasaperez.github.io/";
             return;
         }
         default: {
