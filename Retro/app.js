@@ -164,6 +164,10 @@ function selectApp(id, iframe){
             iframe.parentElement.style.height = "809px";
             break;
         }
+        case "SourceCode" : {
+            window.location.href = "https://github.com/NicolasAPerez/NicolasAPerez.github.io";
+            break;
+        }
         case "SwitchToNormal": {
             window.location.href = "https://nicolasaperez.github.io/";
             return;
