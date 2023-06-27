@@ -230,7 +230,7 @@ img.ShortcutIcon {
     image-rendering: crisp-edges;
     aspect-ratio: 1/1;
     height: 66%;
-    -webkit-user-drag: none;
+
 }
 p.ShortcutTitle {
     margin: 0;
