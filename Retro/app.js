@@ -166,7 +166,7 @@ function selectApp(id, iframe){
         }
         case "SourceCode" : {
             window.location.href = "https://github.com/NicolasAPerez/NicolasAPerez.github.io";
-            break;
+            return;
         }
         case "SwitchToNormal": {
             window.location.href = "https://nicolasaperez.github.io/";

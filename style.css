@@ -19,7 +19,7 @@ html, body, div, button {
 body, div, button {
     color: var(--text_color);
     font-family: "Roboto Light", sans-serif;
-    font-size: clamp(10px, 3vmin, 200%);
+    font-size: clamp(10px, 3vmin, 120%);
 }
 
 html {
@@ -47,6 +47,13 @@ body {
     color: black;
     position: relative;
     float: right;
+    border-radius: 50%;
+    font-size: clamp(10px, 3vmin, 100%);
+    height: 7vmin;
+    border-style: groove ridge ridge groove;
+    border-width: 1vmin;
+    border-color: #e0e0e0;
+
 
 
 }
@@ -57,11 +64,30 @@ body {
     flex-direction: row;
 
 }
+#PersonalLogo {
+    width: clamp(3vmin, 10%, 8vmin);
+    margin-left: 1%;
+    -webkit-user-drag: none;
+}
 
 
 button.QuickBarButton {
     background-color: var(--web);
     width: max-content;
     flex-grow: 1;
+    border-width: 10px 10px;
+    border-style: solid;
+
+    border-image: linear-gradient(var(--web_background), var(--web), var(--web_background)) 30;
 
 }
+
+/* Content Values */
+
+#content {
+    margin: auto;
+    width: 90%;
+    padding: 1vmin;
+    background-color: #355d03;
+}
+
