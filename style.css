@@ -46,7 +46,7 @@ body {
     background-color: white;
     color: black;
     position: relative;
-    right: 0;
+    float: right;
 
 
 }
@@ -62,5 +62,6 @@ body {
 button.QuickBarButton {
     background-color: var(--web);
     width: max-content;
+    flex-grow: 1;
 
 }

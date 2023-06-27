@@ -160,6 +160,8 @@ function selectApp(id, iframe){
         }
         case "Minesweeper": {
             totalSource += "Minesweeper/index.html";
+            iframe.parentElement.style.width = "641px";
+            iframe.parentElement.style.height = "809px";
             break;
         }
         case "SwitchToNormal": {
