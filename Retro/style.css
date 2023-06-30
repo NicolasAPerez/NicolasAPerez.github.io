@@ -210,7 +210,7 @@ iframe.Application {
 
 
     background-color: white;
-    background-image: url("/OS_img/Background.png");
+    background-image: url("/Retro/OS_img/Background.png");
     image-rendering: pixelated;
 
     background-size: cover;

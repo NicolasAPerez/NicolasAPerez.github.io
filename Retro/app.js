@@ -52,7 +52,7 @@ function createBarButton(parentDiv, idName, imageFile){
     currWindow.buttonID = document.getElementById("button").content.firstElementChild.cloneNode(true);
     parentDiv.appendChild(currWindow.buttonID);
 
-    currWindow.buttonID.querySelector(".buttonIcon").src = `/OS_img/${imageFile}.png`;
+    currWindow.buttonID.querySelector(".buttonIcon").src = `./OS_img/${imageFile}.png`;
     currWindow.buttonID.querySelector(".buttonTitle").innerHTML = camelCaseToName(idName);
     currWindow.buttonID.setAttribute("onclick", `toggleVisible('${idName}')`);
 }
@@ -87,7 +87,7 @@ function createWindow(parentDiv, idName, content){
     })
 
     selectApp(idName, currWindow.windowID.querySelector(".Application"));
-    currWindow.windowID.querySelector(".buttonIcon").src = `/OS_img/${idName}.png`;
+    currWindow.windowID.querySelector(".buttonIcon").src = `./OS_img/${idName}.png`;
     currWindow.windowID.querySelector(".windowTitle").innerHTML = camelCaseToName(idName);
     currWindow.windowID.querySelector(".MinimizeWindow").setAttribute("onclick", `toggleVisible('${idName}')`);
     currWindow.windowID.querySelector(".CloseWindow").setAttribute("onclick", `closeWindow('${idName}')`);
@@ -99,7 +99,7 @@ function createShortcut(idName, content){
     shortcut.style.top = (totalApps % numAppsPerHeight * 125) + "px";
     shortcut.style.left = (Math.floor(totalApps / numAppsPerHeight) * 100) + "px";
 
-    shortcut.querySelector(".ShortcutIcon").src = `/OS_img/${idName}.png`;
+    shortcut.querySelector(".ShortcutIcon").src = `./OS_img/${idName}.png`;
     shortcut.querySelector(".ShortcutTitle").innerHTML = camelCaseToName(idName);
     shortcut.setAttribute("onclick", `openWindow('${idName}', '${content}')`);
 
@@ -147,7 +147,7 @@ function moveWindow(event){
 }
 
 function selectApp(id, iframe){
-    let totalSource = "/FrameApps/";
+    let totalSource = "FrameApps/";
 
     switch (id) {
         case "Resume": {
@@ -164,12 +164,24 @@ function selectApp(id, iframe){
             iframe.parentElement.style.height = "809px";
             break;
         }
+        case "AboutMe": {
+            totalSource = "/AboutMe/index.html";
+            break;
+        }
+        case "ContactMe": {
+            totalSource = "/ContactMe/index.html";
+            break;
+        }
+        case "Projects": {
+            totalSource = "/Projects/index.html";
+            break;
+        }
         case "SourceCode" : {
             window.location.href = "https://github.com/NicolasAPerez/NicolasAPerez.github.io";
             return;
         }
         case "SwitchToNormal": {
-            window.location.href = "https://nicolasaperez.github.io/";
+            window.location.href = "/";
             return;
         }
         default: {
