@@ -1,36 +1,145 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Verdant Eclipse</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="/simplified.js"></script>
+  <meta charset="UTF-8">
+  <title>PortfoliOS</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.ico?">
 
-
+  <script src="CustomElements.js" type="module"></script>
+  <script src="app.js"></script>
 </head>
 <body>
-    <div id="Header">
+  <div id="display">
+    <app-window name="TEST" zindex="2">
 
+    </app-window>
+
+  </div>
+
+
+
+  <div class="WindowsBar">
+    <div class="buttonMargin"></div>
+
+
+    <div class="BarOSInfo">
+      <p id="datetime"></p>
     </div>
-    <br>
 
-    <div id="content">
-        <h1>
-            Welcome to Nicolas's Website!
-        </h1>
-        <p>
-            Hello! <br>
-            Before continuing to the sections mentioned above in the toolbar, I would like to state that this is
-            a "simplified" version of my website intended for easy viewing of the content and text, if you're reading
-            this on a desktop computer or laptop I would highly recommend clicking the "Retro" button found above the
-            toolbar. This will lead to the feature complete version of the website where most of the work has gone into.
-            <br> <br>
-            The Retro view is my approximation of using a simple OS desktop with functioning moving windows, and WebGL
-            versions of some of my projects where applicable. This also includes a version of Minesweeper made in Unity
-            to capture the feeling of an old OS like Windows XP.
+</div>
 
-        </p>
-
-    </div>
 </body>
+
+
+<template id="AppWindow">
+  <style>
+    div.AppWindow {
+      width: 75%;
+      height: 80%;
+      position: absolute;
+      left: 10px;
+      top: 10px;
+
+      background-color: white;
+      border-color: var(--main_border_color);
+      border-style: none solid solid solid;
+      border-width: 5px;
+
+    }
+    div.AppWindowTitleBar{
+      width: 100%;
+      height: 5%;
+      background-color: var(--main_border_color);
+
+      -webkit-user-drag: none;
+
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+
+    }
+    div.WindowContent{
+
+    }
+    p.AppWindowTitleString{
+      width: 75%;
+      text-align: left;
+      user-select: none;
+    }
+
+    button.CloseWindow{
+      position: absolute;
+      right: 0;
+      aspect-ratio: 1/1;
+      height: 3%;
+
+      background-color: #b0120a;
+
+      border-width: 3px;
+      border-color: #de140d;
+      border-radius: 40%;
+    }
+
+    button.MinimizeWindow{
+      position: absolute;
+      right: 40px;
+      aspect-ratio: 1/1;
+      height: 3%;
+
+      background-color: #558b2f;
+
+      border-width: 3px;
+      border-color: #9ccc65;
+      border-radius: 40%;
+    }
+
+    iframe.Application {
+      width: 100%;
+      height: 95%;
+      border: none;
+    }
+  </style>
+
+  <div class="AppWindow">
+    <div class="AppWindowTitleBar">
+      <div class="TitleBarIconHolder">
+        <img class="TitleBarIcon" draggable="false">
+      </div>
+      <p class="AppWindowTitleString"></p>
+
+      <button type="button" class="MinimizeWindow"></button>
+
+      <button type="button" class="CloseWindow"></button>
+
+    </div>
+    <slot name="Application">
+      <iframe class="Application" src="/Apps/FrameApps/Loading.gif"></iframe>
+    </slot>
+
+  </div>
+</template>
+
+<template id="button">
+  <button type="button" class="ButtonBarSel">
+    <div class="buttonIconHolder">
+      <img class="buttonIcon" draggable="false">
+
+    </div>
+    <p class="buttonTitle">
+
+    </p>
+
+  </button>
+</template>
+
+
+<template id="shortcut">
+  <button class="ShortcutHolder">
+    <img class="ShortcutIcon" draggable="false">
+    <p class="ShortcutTitle">
+
+    </p>
+  </button>
+</template>
 </html>
