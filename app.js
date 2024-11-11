@@ -207,6 +207,7 @@ document.addEventListener("mouseup", (event) =>{
 
 document.addEventListener("DOMContentLoaded", (event)=>{
     totalApps = 0;
+    document.querySelector(".Short").appWindows = appWindows;
 
     //Insert Applications
     /*

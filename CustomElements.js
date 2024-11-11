@@ -47,7 +47,24 @@ class TaskBarButton extends HTMLElement{
 }
 
 class Shortcut extends HTMLElement{
-    static observedAttributes = ["name", "icon"]
+    static observedAttributes = ["name", "icon", "app-id"]
+
+    #appWindows;
+    app_id;
+
+    set appWindows(value){
+        this.#appWindows = value;
+
+    }
+
+
+    openWindow(){
+        if (!appWindows.has(this.app_id)){
+            console.log(this.app_id);
+
+        }
+    }
+
     constructor() {
         super();
         let template = document.getElementById("Shortcut");
@@ -55,9 +72,10 @@ class Shortcut extends HTMLElement{
 
         const shadowRoot = this.attachShadow({mode: "open"});
         shadowRoot.appendChild(templateContent.cloneNode(true));
+
     }
     connectedCallback(){
-
+        this.shadowRoot.querySelector(".Shortcut").onclick = this.openWindow;
     }
 
     attributeChangedCallback(name, oldValue, newValue){
@@ -67,6 +85,9 @@ class Shortcut extends HTMLElement{
                 break;
             case "icon":
                 this.shadowRoot.querySelector(".ShortcutIcon").src = `./ImageAssets/AppIcons/${newValue}.png`;
+                break;
+            case "app-id":
+                this.app_id = parseInt(newValue);
                 break;
         }
     }
