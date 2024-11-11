@@ -209,7 +209,7 @@ document.addEventListener("DOMContentLoaded", (event)=>{
     totalApps = 0;
 
     //Insert Applications
-
+    /*
     createShortcut("SwitchToNormal", null);
     createShortcut("AboutMe", null);
     createShortcut("ContactMe", null);
@@ -224,8 +224,9 @@ document.addEventListener("DOMContentLoaded", (event)=>{
 
     document.querySelector(".WindowsBar").style.zIndex = totalApps;
 
+     */
     //Clock Functions
-    let clock = document.getElementById("datetime");
+    let clock = document.querySelector(".Clock");
     updateClock(clock);
     updater = setInterval(updateClock, 1000, clock);
     

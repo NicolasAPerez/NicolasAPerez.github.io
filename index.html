@@ -10,24 +10,27 @@
   <script src="app.js"></script>
 </head>
 <body>
-  <div id="display">
-    <app-window name="TEST" zindex="2">
+  <div class="Background">
+    <div class="Shortcut_container">
 
-    </app-window>
-
+    </div>
   </div>
 
 
 
-  <div class="WindowsBar">
+  <div class="TaskBar">
     <div class="buttonMargin"></div>
 
 
-    <div class="BarOSInfo">
-      <p id="datetime"></p>
+    <div class="TaskBarInfo">
+      <p class="Clock">
+        <b>
+
+        </b>
+      </p>
     </div>
 
-</div>
+  </div>
 
 </body>
 
@@ -134,12 +137,36 @@
 </template>
 
 
-<template id="shortcut">
-  <button class="ShortcutHolder">
+<template id="Shortcut">
+  <style>
+    .Shortcut{
+      padding: 5px;
+      width: 100px;
+      height: 175px;
+      background-color: transparent;
+      border-style: none;
+      overflow: hidden;
+    }
+    .ShortcutIcon{
+      width: 100px;
+      height: 100px;
+    }
+    .ShortcutTitle{
+      max-width: 100%;
+      font-size: 16px;
+      font-weight: bold;
+      color: white;
+      text-shadow: 1px 1px black;
+      overflow: hidden;
+      white-space: initial;
+    }
+  </style>
+  <button class="Shortcut">
     <img class="ShortcutIcon" draggable="false">
     <p class="ShortcutTitle">
 
     </p>
   </button>
 </template>
+
 </html>

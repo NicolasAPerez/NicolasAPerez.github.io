@@ -40,54 +40,51 @@ body {
 }
 /*endregion*/
 
-/*Button Bar Values*/
+/*Task Bar Values*/
 /*region*/
 
-div.WindowsBar {
+div.TaskBar{
     background-color: var(--main_color);
     position: fixed;
     bottom: 0;
     width: 100%;
-    height: 8vh;
+    height: max(8vh,50px);
     display: flex;
     align-items: center;
+    border-style: none;
+    z-index: 99;
 
-    border-top: 3px outset var(--main_BG_color);
-
-
+    background-image: linear-gradient(0deg, var(--main_color) 25%, var(--main_border_color) 90%, white);
 }
 
 div.buttonMargin {
     width: 1vw;
 }
 
-div.BarOSInfo {
-    height: 8vh;
-    width: 15%;
+div.TaskBarInfo {
+    height: max(50px, 8vh);
+    width: max(12vw, 150px);
     position: fixed;
     right: 0;
-    background-color: var(--main_BG_color);
+    background-color: #00000044;
 
 
     border-width: 6px;
-    border-left-style: groove;
-    border-bottom-left-radius: 2vw;
-    border-top-left-radius: 2vw;
-    border-left-color: var(--main_border_color);
+    border-left-style: solid;
+    border-radius: 20px 0 0 20px;
+    border-left-color: #00000044;
 
     display: flex;
     align-items: center;
     justify-content: center;
-
 }
 
-#datetime {
+.Clock{
     color: var(--text_color);
 
     font-size: clamp(10px, 2vmin, 30px);
     user-select: none;
     text-align: center;
-
 }
 
 button.ButtonBarSel {
@@ -146,31 +143,32 @@ p.buttonTitle {
 
 
     background-color: white;
-    background-image: url("/Retro/OS_img/Background.png");
+    background-image: url("/ImageAssets/Background.png");
     image-rendering: pixelated;
 
     background-size: cover;
     background-position: bottom;
 }
 
-button.ShortcutHolder {
+.Background{
+    height: 92vh;
+    width: 100%;
+    color: white;
+    background-image: url("./ImageAssets/Background.png");
+    image-rendering: pixelated;
 
-    height: 125px;
-    width: 100px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: transparent;
-}
-img.ShortcutIcon {
-    image-rendering: crisp-edges;
-    aspect-ratio: 1/1;
-    height: 66%;
+    background-size: cover;
+    background-position: bottom;
 
 }
-p.ShortcutTitle {
-    margin: 0;
-    font-size: 16px;
+.Shortcut_container{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    max-height: 100%;
+    align-content: flex-start;
+    column-gap: 10px;
+
 }
 
 
