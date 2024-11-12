@@ -1,22 +1,19 @@
 
-
-let date;
+let mockOS = {}
 let updater;
-const version = "Alpha";
-const appWindows = new Map();
-let totalApps;
+mockOS.version = "1.0";
+mockOS.appWindows = new Map();
 let numAppsPerHeight = Math.floor((window.innerHeight - 100) / 125);
 
-let movingWindow;
 
 //Utility Functions
 
 function updateClock(element){
-    date = new Date();
-    let hour = date.getHours().toLocaleString('en-us', {minimumIntegerDigits: 2});
-    let min = date.getMinutes().toLocaleString('en-us', {minimumIntegerDigits: 2});
-    let sec = date.getSeconds().toLocaleString('en-us', {minimumIntegerDigits: 2})
-    element.innerHTML = `<b>${date.getMonth()}/${date.getDate()}/${date.getFullYear()} <br> ${hour}:${min}:${sec} <br> Version ${version} </b> `;
+    mockOS.date = new Date();
+    let hour = mockOS.date.getHours().toLocaleString('en-us', {minimumIntegerDigits: 2});
+    let min = mockOS.date.getMinutes().toLocaleString('en-us', {minimumIntegerDigits: 2});
+    let sec = mockOS.date.getSeconds().toLocaleString('en-us', {minimumIntegerDigits: 2})
+    element.innerHTML = `<b>${mockOS.date.getMonth()}/${mockOS.date.getDate()}/${mockOS.date.getFullYear()} <br> ${hour}:${min}:${sec} <br> Version ${mockOS.version} </b> `;
 }
 
 function camelCaseToName(camel){
@@ -31,7 +28,6 @@ function camelCaseToName(camel){
         }
         slicedName += newName.charAt(i);
     }
-
     return slicedName;
 }
 function clampNum(minimum, base, maximum){
@@ -59,6 +55,7 @@ function createBarButton(parentDiv, idName, imageFile){
     currWindow.buttonID.setAttribute("onclick", `toggleVisible('${idName}')`);
 }
 
+/*
 function createWindow(parentDiv, idName, content){
     appWindows.set(idName, {});
     let currWindow = appWindows.get(idName);
@@ -105,7 +102,7 @@ function createShortcut(idName, content){
     shortcut.querySelector(".ShortcutTitle").innerHTML = camelCaseToName(idName);
     shortcut.setAttribute("onclick", `openWindow('${idName}', '${content}')`);
 
-    totalApps++;
+    mockOS.totalApps++;
 
 }
 
@@ -115,12 +112,7 @@ function toggleVisible(id){
 
 }
 
-function openWindow(id, content){
-    if (!appWindows.has(id)){
-        createWindow(document.getElementById("display"), id, null);
 
-    }
-}
 
 function closeWindow(id){
     if (appWindows.has(id)){
@@ -132,6 +124,9 @@ function closeWindow(id){
     }
 }
 
+ */
+
+/*
 function moveWindow(event){
     if (event.button === 0){
         let pane = document.getElementById(movingWindow);
@@ -147,6 +142,7 @@ function moveWindow(event){
         }
     }
 }
+ */
 
 function selectApp(id, iframe){
     let totalSource = "FrameApps/";
@@ -194,6 +190,8 @@ function selectApp(id, iframe){
 
     iframe.src = totalSource;
 }
+
+/*
 document.addEventListener("mouseup", (event) =>{
     
     window.removeEventListener("mousemove", moveWindow);
@@ -201,12 +199,15 @@ document.addEventListener("mouseup", (event) =>{
         frame.style.pointerEvents = "auto";
     });
     
-    movingWindow = "";
+    movingWindow = null;
     
-})
+});
+
+ */
 
 document.addEventListener("DOMContentLoaded", (event)=>{
-    totalApps = 0;
+    const appWindows = new Map();
+    mockOS.totalApps = 0;
     document.querySelector(".Short").appWindows = appWindows;
 
     //Insert Applications
