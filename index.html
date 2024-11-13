@@ -47,6 +47,7 @@
 
       background-color: white;
       border-color: var(--main_border_color);
+      border-image: linear-gradient(0deg, var(--main_color) 50%, var(--main_border_color) 80%, white) 15% fill;
       border-style: none solid solid solid;
       border-width: 5px;
 
@@ -54,8 +55,10 @@
     div.AppWindowTitleBar{
       width: 100%;
       height: 5%;
+      /*
       background-color: var(--main_border_color);
-
+      background-image: linear-gradient(0deg, var(--main_BG_color) 25%, var(--main_border_color) 90%, white);
+       */
       -webkit-user-drag: none;
 
       display: flex;
@@ -63,45 +66,46 @@
       overflow: hidden;
 
     }
-    div.WindowContent{
 
-    }
     p.AppWindowTitleString{
       width: 75%;
       text-align: left;
       user-select: none;
     }
 
-    button.CloseWindow{
-      position: absolute;
-      right: 0;
-      aspect-ratio: 1/1;
-      height: 3%;
-
-      background-color: #b0120a;
-
-      border-width: 3px;
-      border-color: #de140d;
-      border-radius: 40%;
+    div.TitleBarOptions{
+      align-self: flex-end;
+      width: 25%;
+      height: 100%;
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
     }
 
-    button.MinimizeWindow{
-      position: absolute;
-      right: 40px;
+    button.TitleBarOptionsButton{
       aspect-ratio: 1/1;
-      height: 3%;
+      height: 70%;
+      background-image: none;
+      border-width: 0;
+      border-radius: 50%;
+    }
+    button.TitleBarOptionsButton:nth-child(1){
+      background-color: #b0120a;
+      border-color: #de140d;
+    }
 
+    button.TitleBarOptionsButton:nth-child(2){
       background-color: #558b2f;
-
-      border-width: 3px;
       border-color: #9ccc65;
-      border-radius: 40%;
     }
 
     iframe.Application {
       width: 100%;
       height: 95%;
       border: none;
+      background-color: white;
+      border-top: 4px solid var(--main_BG_color);
+      margin-top: -4px;
     }
   </style>
 
@@ -112,9 +116,11 @@
       </div>
       <p class="AppWindowTitleString"></p>
 
-      <button type="button" class="MinimizeWindow"></button>
+      <div class="TitleBarOptions">
+        <button type="button" id="close" class="TitleBarOptionsButton"></button>
+        <button type="button" id="minimize" class="TitleBarOptionsButton"></button>
 
-      <button type="button" class="CloseWindow"></button>
+      </div>
 
     </div>
     <slot name="Application">

@@ -3,6 +3,7 @@ let mockOS = {}
 let updater;
 mockOS.version = "1.0";
 mockOS.appWindows = new Map();
+mockOS.z_Stack = [];
 let numAppsPerHeight = Math.floor((window.innerHeight - 100) / 125);
 
 
@@ -34,13 +35,15 @@ function clampNum(minimum, base, maximum){
     return Math.min( Math.max(base, minimum), maximum);
 }
 
-function reorgZIndex(startingIndex){
-    appWindows.forEach( (value, key) =>{
-        let zInd = Number.parseInt(value.windowID.style.zIndex);
-        if (zInd > startingIndex){
-            value.windowID.style.zIndex = --zInd;
+mockOS.reorgZIndex = function (topApp){
+    if (mockOS.z_Stack.at(mockOS.z_Stack.length-1) !== topApp) {
+        mockOS.z_Stack.splice(mockOS.z_Stack.indexOf(topApp), 1);
+        mockOS.z_Stack.push(topApp);
+
+        for (let i = 0; i < mockOS.z_Stack.length; i++) {
+            mockOS.z_Stack[i].setAttribute("z-index", i);
         }
-    });
+    }
 }
 
 //Element Functions
@@ -191,24 +194,24 @@ function selectApp(id, iframe){
     iframe.src = totalSource;
 }
 
-/*
-document.addEventListener("mouseup", (event) =>{
-    
-    window.removeEventListener("mousemove", moveWindow);
-    document.querySelectorAll(".Application").forEach( frame => {
-        frame.style.pointerEvents = "auto";
-    });
-    
-    movingWindow = null;
-    
-});
+mockOS.addWindowMouseUpEvent = function () {
+        document.addEventListener("mouseup", (event) => {
 
- */
+            window.removeEventListener("mousemove", mockOS.movingWindow.moveWindow);
+            mockOS.appWindows.forEach(app => {
+                app.setAttribute("frame-events", "true")
+            });
+            mockOS.movingWindow.setAttribute("selected-app", "false")
+            mockOS.movingWindow = null;
+
+        });
+    }
+
+
 
 document.addEventListener("DOMContentLoaded", (event)=>{
-    const appWindows = new Map();
     mockOS.totalApps = 0;
-    document.querySelector(".Short").appWindows = appWindows;
+    mockOS.addWindowMouseUpEvent();
 
     //Insert Applications
     /*

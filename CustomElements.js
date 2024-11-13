@@ -8,9 +8,6 @@ class AppWindow extends HTMLElement{
 
     }
 
-    moveWindowEventApplier(){
-
-    }
     moveWindow(event){
         if (event.button === 0){
             let pane = mockOS.movingWindow;
@@ -40,19 +37,21 @@ class AppWindow extends HTMLElement{
 
 
         this.shadowRoot.querySelector(".AppWindowTitleBar").addEventListener("mousedown", (event) =>{
-            this.mouseRelX = event.clientX - parseInt(event.currentTarget.parentElement.style.left);
-            this.mouseRelY = event.clientY - parseInt(event.currentTarget.parentElement.style.top);
-            document.querySelectorAll("app-window").forEach( frame => {
-                frame.setAttribute("frame-events", "false");
-            });
+            if (event.target.className !== "TitleBarOptionsButton") {
+                this.mouseRelX = event.clientX - parseInt(event.currentTarget.parentElement.style.left);
+                this.mouseRelY = event.clientY - parseInt(event.currentTarget.parentElement.style.top);
+                mockOS.appWindows.forEach(app => {
+                    app.setAttribute("frame-events", "false")
+                });
 
-            //reorgZIndex(Number.parseInt(appWindows.get(idName).windowID.style.zIndex));
-            this.setAttribute("z-index", mockOS.appWindows.size.toString())
+                mockOS.reorgZIndex(this);
+                this.setAttribute("z-index", mockOS.appWindows.size.toString())
 
-            if (this !== mockOS.movingWindow){
-                mockOS.movingWindow = this;
+                if (this !== mockOS.movingWindow) {
+                    mockOS.movingWindow = this;
+                }
+                this.setAttribute("selected-app", "true");
             }
-            this.setAttribute("selected-app", "true");
 
         })
     }
@@ -105,7 +104,7 @@ class TaskBarButton extends HTMLElement{
                 break;
             case "app":
                 break;
-            case "zindex":
+            case "z-index":
                 this.shadowRoot.querySelector(".AppWindow").style.zIndex = newValue;
         }
     }
@@ -122,6 +121,7 @@ class Shortcut extends HTMLElement{
         if (!mockOS.appWindows.has(this.app_id)){
             let window = document.createElement("app-window")
             mockOS.appWindows.set(this.app_id, window);
+            mockOS.z_Stack.push(window);
             document.querySelector(".Background").appendChild(window);
             window.setAttribute("id", "Window_" + this.app_id);
             window.setAttribute("name", this.name);
