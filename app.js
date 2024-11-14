@@ -1,9 +1,5 @@
-
-let mockOS = {}
+import {default as mockOS} from "./WindowManager.js";
 let updater;
-mockOS.version = "1.0";
-mockOS.appWindows = new Map();
-mockOS.z_Stack = [];
 let numAppsPerHeight = Math.floor((window.innerHeight - 100) / 125);
 
 
@@ -184,6 +180,7 @@ function selectApp(id, iframe){
 
 
 document.addEventListener("DOMContentLoaded", (event)=>{
+    mockOS.startup();
 
 
 
@@ -206,7 +203,7 @@ document.addEventListener("DOMContentLoaded", (event)=>{
      */
     //Clock Functions
 
-    updater = setInterval(updateClock, 1000, clock);
+    updater = setInterval(mockOS.updateClock, 1000, clock);
     
 
 });

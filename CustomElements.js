@@ -1,3 +1,6 @@
+import {default as mockOS} from "./WindowManager.js";
+
+
 class AppWindow extends HTMLElement{
     static observedAttributes = ["id", "name", "app-id","active-app", "selected-app", "z-index", "frame-events"]
     taskBarButton;

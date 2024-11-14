@@ -48,7 +48,7 @@ mockOS.accessApp = function (appID){
 }
 
 
-mockOS.startup = function (imageLocation, appLocation){
+mockOS.startup = function (imageLocation = "", appLocation = ""){
     mockOS.imageLocation = imageLocation;
     mockOS.appLocation = appLocation;
     mockOS.addWindowMouseUpEvent();
@@ -57,3 +57,5 @@ mockOS.startup = function (imageLocation, appLocation){
     mockOS.updateClock(clock);
 
 }
+
+export default mockOS;
