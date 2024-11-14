@@ -87,46 +87,7 @@ div.TaskBarInfo {
     text-align: center;
 }
 
-button.ButtonBarSel {
-    background-color: var(--button_main);
-    border-width: 6px;
-    border-bottom-color: var(--button_shadow);
-    border-right-color: var(--button_shadow);
-    border-left-color: var(--button_highlight);
-    border-top-color: var(--button_highlight);
 
-    margin-left: 0.5vw;
-    width: 15%;
-    height: 85%;
-
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-
-}
-
-div.buttonIconHolder {
-    margin-left: min(5%, 10px);
-    margin-right: min(1%, 10px);
-
-    height: 75%;
-    aspect-ratio: 1/1;
-
-
-}
-
-img.buttonIcon {
-    max-height: 100%;
-
-    user-select: none;
-    -webkit-user-drag: none;
-
-}
-
-p.buttonTitle {
-    width: 75%;
-    text-align: left;
-}
 /*endregion*/
 
 /*Window Opened Values*/

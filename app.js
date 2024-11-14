@@ -9,13 +9,7 @@ let numAppsPerHeight = Math.floor((window.innerHeight - 100) / 125);
 
 //Utility Functions
 
-function updateClock(element){
-    mockOS.date = new Date();
-    let hour = mockOS.date.getHours().toLocaleString('en-us', {minimumIntegerDigits: 2});
-    let min = mockOS.date.getMinutes().toLocaleString('en-us', {minimumIntegerDigits: 2});
-    let sec = mockOS.date.getSeconds().toLocaleString('en-us', {minimumIntegerDigits: 2})
-    element.innerHTML = `<b>${mockOS.date.getMonth()}/${mockOS.date.getDate()}/${mockOS.date.getFullYear()} <br> ${hour}:${min}:${sec} <br> Version ${mockOS.version} </b> `;
-}
+
 
 function camelCaseToName(camel){
     let newName = camel;
@@ -35,16 +29,7 @@ function clampNum(minimum, base, maximum){
     return Math.min( Math.max(base, minimum), maximum);
 }
 
-mockOS.reorgZIndex = function (topApp){
-    if (mockOS.z_Stack.at(mockOS.z_Stack.length-1) !== topApp) {
-        mockOS.z_Stack.splice(mockOS.z_Stack.indexOf(topApp), 1);
-        mockOS.z_Stack.push(topApp);
 
-        for (let i = 0; i < mockOS.z_Stack.length; i++) {
-            mockOS.z_Stack[i].setAttribute("z-index", i);
-        }
-    }
-}
 
 //Element Functions
 
@@ -194,24 +179,13 @@ function selectApp(id, iframe){
     iframe.src = totalSource;
 }
 
-mockOS.addWindowMouseUpEvent = function () {
-        document.addEventListener("mouseup", (event) => {
 
-            window.removeEventListener("mousemove", mockOS.movingWindow.moveWindow);
-            mockOS.appWindows.forEach(app => {
-                app.setAttribute("frame-events", "true")
-            });
-            mockOS.movingWindow.setAttribute("selected-app", "false")
-            mockOS.movingWindow = null;
-
-        });
-    }
 
 
 
 document.addEventListener("DOMContentLoaded", (event)=>{
-    mockOS.totalApps = 0;
-    mockOS.addWindowMouseUpEvent();
+
+
 
     //Insert Applications
     /*
@@ -231,8 +205,7 @@ document.addEventListener("DOMContentLoaded", (event)=>{
 
      */
     //Clock Functions
-    let clock = document.querySelector(".Clock");
-    updateClock(clock);
+
     updater = setInterval(updateClock, 1000, clock);
     
 
