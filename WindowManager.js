@@ -1,4 +1,4 @@
-let mockOS = {}
+const mockOS = {}
 mockOS.version = "1.0";
 mockOS.appWindows = new Map();
 mockOS.appFileData = new Map();
@@ -53,8 +53,10 @@ mockOS.startup = function (imageLocation = "", appLocation = ""){
     mockOS.appLocation = appLocation;
     mockOS.addWindowMouseUpEvent();
 
-    let clock = document.querySelector(".Clock");
-    mockOS.updateClock(clock);
+    mockOS.clock = document.querySelector(".Clock");
+    mockOS.updateClock(mockOS.clock);
+    let updater = setInterval(mockOS.updateClock, 1000, mockOS.clock);
+
 
 }
 

@@ -1,5 +1,5 @@
 import {default as mockOS} from "./WindowManager.js";
-
+import {default as Toolkit} from "./Toolkit.js";
 
 class AppWindow extends HTMLElement{
     static observedAttributes = ["id", "name", "app-id","active-app", "selected-app", "z-index", "frame-events"]
@@ -50,8 +50,8 @@ class AppWindow extends HTMLElement{
             let left = event.clientX - pane.mouseRelX;
             let top = event.clientY - pane.mouseRelY;
 
-            left = clampNum(0, left, window.innerWidth - pane.offsetWidth);
-            top = clampNum(0, top, window.innerHeight - pane.offsetHeight);
+            left = Toolkit.clampNum(0, left, window.innerWidth - pane.offsetWidth);
+            top = Toolkit.clampNum(0, top, window.innerHeight - pane.offsetHeight);
             this.shadowRoot.querySelector(".AppWindow").style.left = left + "px";
             this.shadowRoot.querySelector(".AppWindow").style.top = top + "px"
 
