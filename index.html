@@ -14,7 +14,6 @@
 <body>
   <div class="Background">
     <div class="Shortcut_container">
-      <window-shortcut id="test" class="Short" name="TEST" icon="AboutMe" app-id="1"></window-shortcut>
 
     </div>
   </div>
@@ -70,9 +69,18 @@
     }
 
     p.AppWindowTitleString{
-      width: 75%;
+      flex-grow: 1;
       text-align: left;
       user-select: none;
+    }
+    div.TitleBarIconHolder{
+      max-height: 100%;
+      width: 3vh;
+    }
+
+    img.TitleBarIcon{
+      max-height: 100%;
+      max-width: 100%;
     }
 
     div.TitleBarOptions{
@@ -140,14 +148,52 @@
   </div>
 </template>
 
-<template id="TaskbarButton">
-  <button type="button" class="ButtonBarSel">
-    <div class="buttonIconHolder">
-      <img class="buttonIcon" draggable="false">
+<template id="TaskBarButton">
+  <style>
+    button.TaskBarButton {
+      border-width: 1px;
+      border-radius: 20px;
+      border-color: var(--button_main);
+      background-image: linear-gradient(0deg, rgba(150,150,150,0.5) 25%, rgba(200,200,200,0.5) 90%, rgba(250,250,250,0.5));
+      background-color: transparent;
+      margin-left: 0.5vw;
+      height: 100%;
 
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+
+    }
+
+    div.TBIconHolder {
+      margin-left: min(5%, 10px);
+      margin-right: min(1%, 10px);
+
+      height: 75%;
+      aspect-ratio: 1/1;
+
+
+    }
+
+    img.TBIcon {
+      max-height: 100%;
+
+      user-select: none;
+      -webkit-user-drag: none;
+
+    }
+
+    p.TBTitle {
+      width: 75%;
+      text-align: left;
+    }
+
+  </style>
+  <button type="button" class="TaskBarButton">
+    <div class="TBIconHolder">
+      <img class="TBIcon" draggable="false">
     </div>
-    <p class="buttonTitle">
-
+    <p class="TBTitle">
     </p>
 
   </button>

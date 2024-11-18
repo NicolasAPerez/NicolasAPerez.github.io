@@ -9,6 +9,14 @@ class AppWindow extends HTMLElement{
     app_id;
 
     createTaskbarButton(){
+        let task = document.createElement("taskbar-button")
+        mockOS.taskbarContainer.appendChild(task);
+        this.taskBarButton = task;
+        task.setAttribute("id", "Taskbar_" + this.app_id);
+        task.setAttribute("app-id", this.app_id);
+        task.setAttribute("name", this.name);
+        task.setAttribute("active-app", "true");
+
 
     }
 
@@ -45,7 +53,7 @@ class AppWindow extends HTMLElement{
     }
 
     moveWindow(event){
-        if (event.button === 0 && mockOS.movingWindow){
+        if (event.button === 0 && mockOS.movingWindow && this === mockOS.movingWindow){
             let pane = mockOS.movingWindow;
             let left = event.clientX - pane.mouseRelX;
             let top = event.clientY - pane.mouseRelY;
@@ -68,8 +76,10 @@ class AppWindow extends HTMLElement{
     }
 
     connectedCallback(){
+        this.createTaskbarButton();
         this.shadowRoot.querySelector(".AppWindow").style.top = "10px";
         this.shadowRoot.querySelector(".AppWindow").style.left = "10px";
+
 
 
         this.shadowRoot.querySelector(".AppWindowTitleBar").addEventListener("mousedown", this.holdingWindow.bind(this));
@@ -85,6 +95,9 @@ class AppWindow extends HTMLElement{
                 break;
             case "app-id":
                 this.app_id = parseInt(newValue);
+                if (this.app_id || this.app_id === 0) {
+                    this.shadowRoot.querySelector(".TitleBarIcon").src = mockOS.getIcon(this.app_id);
+                }
                 break;
             case "z-index":
                 this.shadowRoot.querySelector(".AppWindow").style.zIndex = newValue;
@@ -129,10 +142,14 @@ class TaskBarButton extends HTMLElement{
         shadowRoot.appendChild(templateContent.cloneNode(true));
     }
 
+    connectedCallback(){
+        this.setAttribute("style", "height: 100%");
+    }
+
     attributeChangedCallback(name, oldValue, newValue){
         switch (name){
             case "name":
-                this.shadowRoot.querySelector(".AppWindowTitleString").innerHTML = newValue;
+                this.shadowRoot.querySelector(".TBTitle").innerHTML = newValue;
                 break;
             case "app":
                 break;
@@ -154,14 +171,12 @@ class Shortcut extends HTMLElement{
             let window = document.createElement("app-window")
             mockOS.appWindows.set(this.app_id, window);
             mockOS.z_Stack.push(window);
-            document.querySelector(".Background").appendChild(window);
+            mockOS.windowContainer.appendChild(window);
             window.setAttribute("id", "Window_" + this.app_id);
             window.setAttribute("app-id", this.app_id);
             window.setAttribute("name", this.name);
             window.setAttribute("active-app", "true");
             window.setAttribute("z-index", mockOS.appWindows.size.toString());
-
-
         }
     }
 
@@ -175,7 +190,7 @@ class Shortcut extends HTMLElement{
 
     }
     connectedCallback(){
-        this.shadowRoot.querySelector(".Shortcut").setAttribute("onclick",`${this.getAttribute("id")}.openMockWindow()`);
+        this.shadowRoot.querySelector(".Shortcut").addEventListener("click", this.openMockWindow.bind(this));
     }
 
     attributeChangedCallback(name, oldValue, newValue){
@@ -189,6 +204,9 @@ class Shortcut extends HTMLElement{
                 break;
             case "app-id":
                 this.app_id = parseInt(newValue);
+                if (this.app_id || this.app_id === 0) {
+                    this.shadowRoot.querySelector(".ShortcutIcon").src = mockOS.getIcon(this.app_id);
+                }
                 break;
         }
     }

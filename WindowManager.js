@@ -3,8 +3,29 @@ mockOS.version = "1.0";
 mockOS.appWindows = new Map();
 mockOS.appFileData = new Map();
 mockOS.z_Stack = [];
+mockOS.shortcutContainer = null;
+mockOS.windowContainer = null;
+mockOS.taskbarContainer = null;
 mockOS.imageLocation = "";
 mockOS.appLocation = "";
+
+
+mockOS.insertAppData = function (name, image, app){
+    let id = mockOS.appFileData.size;
+    mockOS.appFileData.set(id, {app_id: id,  name: name, img: image, app: app});
+    return mockOS.appFileData.get(id);
+}
+
+mockOS.insertShortcuts = function (){
+    mockOS.appFileData.forEach( (app) => {
+        let shortcut = document.createElement("window-shortcut");
+        shortcut.setAttribute("id", "Shortcut_" + app.app_id);
+        shortcut.setAttribute("app-id", app.app_id);
+        shortcut.setAttribute("name", app.name);
+
+        mockOS.shortcutContainer.appendChild(shortcut);
+    });
+}
 
 mockOS.updateClock = function (element){
     mockOS.date = new Date();
@@ -23,7 +44,7 @@ mockOS.reorgZIndex = function (topApp = null){
         }
 
         for (let i = 0; i < mockOS.z_Stack.length; i++) {
-            mockOS.z_Stack[i].setAttribute("z-index", i);
+            mockOS.z_Stack[i].setAttribute("z-index", i + 1);
         }
     }
 }
@@ -43,12 +64,21 @@ mockOS.addWindowMouseUpEvent = function () {
     });
 }
 
+
+
+mockOS.getIcon = function (appID){
+    return `${mockOS.imageLocation}/${mockOS.appFileData.get(appID).img}`;
+}
+
 mockOS.accessApp = function (appID){
 
 }
 
 
-mockOS.startup = function (imageLocation = "", appLocation = ""){
+mockOS.startup = function (shortcutContainer, windowContainer, taskbarContainer, imageLocation = "", appLocation = ""){
+    mockOS.shortcutContainer = shortcutContainer;
+    mockOS.windowContainer = windowContainer;
+    mockOS.taskbarContainer = taskbarContainer;
     mockOS.imageLocation = imageLocation;
     mockOS.appLocation = appLocation;
     mockOS.addWindowMouseUpEvent();

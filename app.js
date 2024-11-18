@@ -1,4 +1,4 @@
-import {default as mockOS} from "./WindowManager.js";
+import windowManager, {default as mockOS} from "./WindowManager.js";
 let updater;
 let numAppsPerHeight = Math.floor((window.innerHeight - 100) / 125);
 
@@ -112,51 +112,11 @@ function moveWindow(event){
 }
  */
 
-function selectApp(id, iframe){
-    let totalSource = "FrameApps/";
+function insertApps(){
+    mockOS.insertAppData("Testing App", "AboutMe.png", "Loading.gif");
+    mockOS.insertAppData("Testing App 2", "AboutMe.png", "Loading.gif");
 
-    switch (id) {
-        case "Resume": {
-            totalSource += "NAP_Resume.pdf";
-            break;
-        }
-        case "Spellbound": {
-            totalSource += "SpellboundDEMO/index.html";
-            break;
-        }
-        case "Minesweeper": {
-            totalSource += "Minesweeper/index.html";
-            iframe.parentElement.style.width = "641px";
-            iframe.parentElement.style.height = "809px";
-            break;
-        }
-        case "AboutMe": {
-            totalSource = "/AboutMe/index.html";
-            break;
-        }
-        case "ContactMe": {
-            totalSource = "/ContactMe/index.html";
-            break;
-        }
-        case "Projects": {
-            totalSource = "/Projects/index.html";
-            break;
-        }
-        case "SourceCode" : {
-            window.location.href = "https://github.com/NicolasAPerez/NicolasAPerez.github.io";
-            return;
-        }
-        case "SwitchToNormal": {
-            window.location.href = "/";
-            return;
-        }
-        default: {
-            totalSource += "Loading.gif"
-            iframe.draggable = "false";
-        }
-    }
 
-    iframe.src = totalSource;
 }
 
 
@@ -164,7 +124,12 @@ function selectApp(id, iframe){
 
 
 document.addEventListener("DOMContentLoaded", (event)=>{
-    mockOS.startup();
+    let app_container = document.querySelector(".Background");
+    let shortcut_container = document.querySelector(".Shortcut_container");
+    let taskbar_container = document.querySelector(".TaskBar");
+    mockOS.startup(shortcut_container, app_container, taskbar_container, "./ImageAssets/AppIcons/", "./Apps/FrameApps/");
+    insertApps();
+    mockOS.insertShortcuts();
 
 
 
