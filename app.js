@@ -10,7 +10,19 @@ function insertApps(){
     mockOS.insertAppData("Spellbound Demo", "Spellbound.png","SpellboundDEMO/index.html");
 }
 
-function lastUpdatedOn(){
+
+
+
+document.addEventListener("DOMContentLoaded", (event)=>{
+    let app_container = document.querySelector(".Background");
+    let shortcut_container = document.querySelector(".Shortcut_container");
+    let taskbar_container = document.querySelector(".TaskBar");
+    mockOS.startup(shortcut_container, app_container, taskbar_container, "./ImageAssets/AppIcons/", "./Apps/");
+    insertApps();
+    mockOS.insertShortcuts();
+
+});
+window.addEventListener.onload = () =>{
     let text = document.getElementById("openOSAlert");
     let date = "2024-11-19"; //Fallback
     fetch("https://api.github.com/repos/NicolasAPerez/NicolasAPerez.github.io/commits").then(res => {
@@ -26,21 +38,4 @@ function lastUpdatedOn(){
             text.innerHTML += date;
         }
     });
-
-
 }
-
-
-
-
-
-document.addEventListener("DOMContentLoaded", (event)=>{
-    let app_container = document.querySelector(".Background");
-    let shortcut_container = document.querySelector(".Shortcut_container");
-    let taskbar_container = document.querySelector(".TaskBar");
-    mockOS.startup(shortcut_container, app_container, taskbar_container, "./ImageAssets/AppIcons/", "./Apps/");
-    insertApps();
-    mockOS.insertShortcuts();
-
-});
-document.getElementById("openOSAlert").addEventListener("load",lastUpdatedOn);
