@@ -3,9 +3,11 @@ import windowManager, {default as mockOS} from "./WindowManager.js";
 
 
 function insertApps(){
-    mockOS.insertAppData("Testing App", "AboutMe.png", "Loading.gif");
-    mockOS.insertAppData("Testing App 2", "AboutMe.png", "Loading.gif");
-    mockOS.insertAppData("Resume Test", "Resume.png", "NAP_Resume.pdf");
+    mockOS.insertAppData("About Me", "AboutMe.png", "AboutMe.html");
+    mockOS.insertAppData("Contact Me", "ContactMe.png", "ContactMe.html");
+    mockOS.insertAppData("CV", "Resume.png", "NAP_CV_Internet.pdf");
+    mockOS.insertAppData("Minesweeper", "Minesweeper.png", "Minesweeper/index.html");
+    mockOS.insertAppData("Spellbound Demo", "Spellbound.png","SpellboundDEMO/index.html");
 }
 
 function lastUpdatedOn(){
@@ -39,9 +41,6 @@ document.addEventListener("DOMContentLoaded", (event)=>{
     mockOS.startup(shortcut_container, app_container, taskbar_container, "./ImageAssets/AppIcons/", "./Apps/");
     insertApps();
     mockOS.insertShortcuts();
-    lastUpdatedOn();
-
-
 
 });
-
+document.getElementById("openOSAlert").addEventListener("load",lastUpdatedOn);

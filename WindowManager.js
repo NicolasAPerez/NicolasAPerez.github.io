@@ -86,7 +86,7 @@ mockOS.getAppHTML = function (appID){
             break;
         case "html":
         default:
-            AppHTML = `<iframe src="${appFile}" slot="Application"></iframe>`
+            AppHTML = `<iframe src="${appFile}" slot="Application" scrolling="yes"></iframe>`
             break;
 
     }

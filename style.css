@@ -40,8 +40,6 @@ body {
 }
 /*endregion*/
 
-/*Task Bar Values*/
-/*region*/
 
 alert-window:not(:defined) {
     display:none
@@ -90,30 +88,13 @@ div.TaskBarInfo {
     user-select: none;
     text-align: center;
 }
-
-
-/*endregion*/
-
-/*Window Opened Values*/
-/*region*/
-
-
-/*endregion*/
+div.content{
+    margin: 10px;
+}
 
 /*OS Values*/
 /*region*/
 
-#display {
-    height: 92vh;
-
-
-    background-color: white;
-    background-image: url("/ImageAssets/Background.png");
-    image-rendering: pixelated;
-
-    background-size: cover;
-    background-position: bottom;
-}
 
 .Background{
     height: 92vh;

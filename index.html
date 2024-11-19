@@ -214,8 +214,13 @@
       background-color: white;
       border-top: 4px solid var(--main_BG_color);
       margin-top: -4px;
-      overflow: auto;
-      white-space: nowrap;
+    }
+    ::slotted(*){
+      height: 100%;
+      width: 100%;
+      border: none;
+      overflow: auto !important;
+
     }
 
     ::slotted(object){
@@ -224,6 +229,7 @@
     }
     ::slotted(img){
       height: 100%;
+      width: auto;
       margin: 5px;
       aspect-ratio: auto;
     }
