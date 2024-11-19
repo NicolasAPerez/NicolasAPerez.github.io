@@ -1,0 +1,2 @@
+These files are for easier editing of templates away from the main index file, but otherwise serve no purpose.
+They could be loaded into the CustomElements.js file via fetch, but I decided it wasn't worth the additional loading and effort.

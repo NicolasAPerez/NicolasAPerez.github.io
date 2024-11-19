@@ -1,0 +1,102 @@
+<template id="AppWindow">
+  <style>
+    div.AppWindow {
+      width: 75%;
+      height: 80%;
+      position: absolute;
+      left: 10px;
+      top: 10px;
+
+      background-color: white;
+      border-color: var(--main_border_color);
+      border-image: linear-gradient(0deg, var(--main_color) 50%, var(--main_border_color) 80%, white) 15% fill;
+      border-style: none solid solid solid;
+      border-width: 5px;
+
+    }
+    div.AppWindowTitleBar{
+      width: 100%;
+      height: 5%;
+      /*
+      background-color: var(--main_border_color);
+      background-image: linear-gradient(0deg, var(--main_BG_color) 25%, var(--main_border_color) 90%, white);
+       */
+      -webkit-user-drag: none;
+
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+
+    }
+
+    p.AppWindowTitleString{
+      width: 75%;
+      text-align: left;
+      user-select: none;
+    }
+
+    div.TitleBarOptions{
+      align-self: flex-end;
+      width: 25%;
+      height: 100%;
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+    }
+
+    button.TitleBarOptionsButton{
+      aspect-ratio: 1/1;
+      height: 70%;
+      background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(200,200,200,0.1) 50%);
+      margin: 2px;
+      border-width: 0;
+      border-radius: 50%;
+    }
+    button.TitleBarOptionsButton:hover{
+      background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(200,200,200,0.1) 50%);
+    }
+    button.TitleBarOptionsButton:active{
+      background-image: linear-gradient(180deg, rgba(100, 100, 100, 0.9), rgba(200,200,200,0.1) 50%);
+    }
+    button.TitleBarOptionsButton:nth-child(1){
+      background-color: #b0120a;
+      border-color: #de140d;
+    }
+
+    button.TitleBarOptionsButton:nth-child(2){
+      background-color: #558b2f;
+      border-color: #9ccc65;
+    }
+
+    div.Application {
+      width: 100%;
+      height: 95%;
+      border: none;
+      background-color: white;
+      border-top: 4px solid var(--main_BG_color);
+      margin-top: -4px;
+    }
+  </style>
+
+  <div class="AppWindow">
+    <div class="AppWindowTitleBar">
+      <div class="TitleBarIconHolder">
+        <img class="TitleBarIcon" draggable="false">
+      </div>
+      <p class="AppWindowTitleString"></p>
+
+      <div class="TitleBarOptions">
+        <button type="button" id="close" class="TitleBarOptionsButton"></button>
+        <button type="button" id="minimize" class="TitleBarOptionsButton"></button>
+
+      </div>
+
+    </div>
+    <div class="Application">
+      <slot name="Application">
+        <iframe src="/Apps/Loading.gif"></iframe>
+      </slot>
+    </div>
+
+  </div>
+</template>
