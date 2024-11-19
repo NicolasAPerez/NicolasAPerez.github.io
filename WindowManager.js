@@ -67,10 +67,31 @@ mockOS.addWindowMouseUpEvent = function () {
 
 
 mockOS.getIcon = function (appID){
-    return `${mockOS.imageLocation}/${mockOS.appFileData.get(appID).img}`;
+    return `${mockOS.imageLocation}${mockOS.appFileData.get(appID).img}`;
 }
 
-mockOS.accessApp = function (appID){
+//Use if not using iframes to display images
+mockOS.getAppHTML = function (appID){
+    let appFile = `${mockOS.appLocation}${mockOS.appFileData.get(appID).app}`;
+    let extension = appFile.split('.').pop();
+    let AppHTML = "";
+    switch (extension){
+        case "png":
+        case "jpg":
+        case "gif":
+            AppHTML = `<img src="${appFile}" slot="Application">`
+            break;
+        case "pdf":
+            AppHTML = `<object data="${appFile}" type="application/pdf" slot="Application">Item Failed to Display!</object>`;
+            break;
+        case "html":
+        default:
+            AppHTML = `<iframe src="${appFile}" slot="Application"></iframe>`
+            break;
+
+    }
+
+    return AppHTML;
 
 }
 

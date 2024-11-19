@@ -70,6 +70,10 @@ class AppWindow extends HTMLElement{
         }
     }
 
+    attachApp(){
+        this.innerHTML =  mockOS.getAppHTML(this.app_id);
+    }
+
     constructor() {
         super();
         let template = document.getElementById("AppWindow");
@@ -104,6 +108,8 @@ class AppWindow extends HTMLElement{
                     this.shadowRoot.querySelector(".TitleBarIcon").src = mockOS.getIcon(this.app_id);
                     this.taskBarButton.setAttribute("app-id", newValue);
                     this.taskBarButton.setAttribute("id", "Taskbar_" + this.app_id);
+                    this.attachApp();
+
                 }
                 break;
             case "z-index":
@@ -262,6 +268,9 @@ class Alert extends HTMLElement{
     connectedCallback(){
         if (!this.getAttribute("id")){
             this.setAttribute("id", "Alert_" + document.querySelectorAll("alert-window").length)
+        }
+        if (this.getAttribute("checkSession") === "true" && sessionStorage.getItem(this.id + "_seen") === "true"){
+            this.remove();
         }
         if (this.shadowRoot) {
             this.shadowRoot.querySelector(".AlertClose").addEventListener("click", this.closeAlertWindow.bind(this));

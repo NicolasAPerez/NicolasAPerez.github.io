@@ -68,7 +68,7 @@
       border-color: #9ccc65;
     }
 
-    iframe.Application {
+    div.Application {
       width: 100%;
       height: 95%;
       border: none;
@@ -92,9 +92,11 @@
       </div>
 
     </div>
-    <slot name="Application">
-      <iframe class="Application" src="/Apps/FrameApps/Loading.gif"></iframe>
-    </slot>
+    <div class="Application">
+      <slot name="Application">
+        <iframe src="/Apps/Loading.gif"></iframe>
+      </slot>
+    </div>
 
   </div>
 </template>
