@@ -12,6 +12,13 @@
   <script src="app.js" type="module"></script>
 </head>
 <body>
+  <alert-window id="Alert_1" checkSession="true">
+    <p id="openOSAlert" slot="AlertMessage">
+      The following website is still under construction, and has yet to be finished. <br/>
+      Some items will be out of date until it is finished. <br/>
+      The last update was on:
+    </p>
+  </alert-window>
   <div class="Background">
     <div class="Shortcut_container">
 
@@ -36,6 +43,88 @@
 
 </body>
 
+<template id="Alert">
+  <style>
+    *:not(:defined) { display:none }
+    div.GreyOverlay{
+      position: absolute;
+      left: 0;
+      top:0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(100,100,100,0.5);
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    div.AlertWindow {
+      width: 40%;
+
+
+      background-color: white;
+      border-color: var(--main_border_color);
+      border-image: linear-gradient(0deg, var(--main_color) 50%, var(--main_border_color) 80%, white) 15% fill;
+      border-style: none solid solid solid;
+      border-width: 5px;
+
+    }
+    div.AlertWindowTitleBar{
+      width: 100%;
+      height: 5%;
+
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+
+    }
+    div.AlertMessageContainer {
+
+      width: 100%;
+      border: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: white;
+      border-top: 4px solid var(--main_BG_color);
+      margin-top: -4px;
+    }
+    button.AlertClose{
+      margin: 5px;
+      font-size: 1.9em;
+    }
+
+    ::slotted(p){
+      color: black !important;
+      font-size: 1.9em !important;
+
+      text-align: center;
+      user-select: none;
+    }
+  </style>
+
+
+  <div class="GreyOverlay">
+    <div class="AlertWindow">
+      <div class="AlertWindowTitleBar">
+        <p class="AlertWindowTitleString"></p>
+      </div>
+      <div class="AlertMessageContainer">
+        <slot name="AlertMessage">
+          <p>
+            Unknown Alert Pushed!
+          </p>
+        </slot>
+        <button class="AlertClose">
+          Okay!
+        </button>
+      </div>
+
+
+    </div>
+  </div>
+
+</template>
 
 <template id="AppWindow">
   <style>

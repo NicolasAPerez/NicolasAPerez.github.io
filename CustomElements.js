@@ -234,11 +234,46 @@ class Shortcut extends HTMLElement{
     }
 }
 
+class Alert extends HTMLElement{
+    static observedAttributes = ["id", "checkSession"]
+
+
+    closeAlertWindow(){
+        if (this.getAttribute("checkSession") === "true"){
+            sessionStorage.setItem(this.id + "_seen", "true")
+        }
+        this.remove();
+    }
+
+    constructor() {
+        super();
+        if (!(this.getAttribute("checkSession") === "true") || !(sessionStorage.getItem(this.id + "_seen") === "true")) {
+            let template = document.getElementById("Alert");
+            let templateContent = template.content;
+
+            const shadowRoot = this.attachShadow({mode: "open"});
+            shadowRoot.appendChild(templateContent.cloneNode(true));
+        }
+        else {
+            this.remove();
+        }
+    }
+
+    connectedCallback(){
+        if (!this.getAttribute("id")){
+            this.setAttribute("id", "Alert_" + document.querySelectorAll("alert-window").length)
+        }
+        if (this.shadowRoot) {
+            this.shadowRoot.querySelector(".AlertClose").addEventListener("click", this.closeAlertWindow.bind(this));
+        }
+    }
+}
 
 function defineComponents(){
     customElements.define("app-window", AppWindow);
     customElements.define("taskbar-button", TaskBarButton);
     customElements.define("window-shortcut", Shortcut);
+    customElements.define("alert-window", Alert)
 
 }
 

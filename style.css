@@ -43,6 +43,10 @@ body {
 /*Task Bar Values*/
 /*region*/
 
+alert-window:not(:defined) {
+    display:none
+}
+
 div.TaskBar{
     background-color: var(--main_color);
     position: fixed;
