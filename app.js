@@ -21,8 +21,6 @@ document.addEventListener("DOMContentLoaded", (event)=>{
     insertApps();
     mockOS.insertShortcuts();
 
-});
-window.addEventListener.onload = () =>{
     let text = document.getElementById("openOSAlert");
     let date = "2024-11-19"; //Fallback
     fetch("https://api.github.com/repos/NicolasAPerez/NicolasAPerez.github.io/commits").then(res => {
@@ -38,4 +36,6 @@ window.addEventListener.onload = () =>{
             text.innerHTML += date;
         }
     });
-}
+
+});
+
