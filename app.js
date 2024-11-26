@@ -23,19 +23,24 @@ document.addEventListener("DOMContentLoaded", (event)=>{
 
     let text = document.getElementById("openOSAlert");
     let date = "2024-11-19"; //Fallback
-    fetch("https://api.github.com/repos/NicolasAPerez/NicolasAPerez.github.io/commits").then(res => {
-        if (res.ok){
-            res.json().then(data =>{
-                date = data[0].commit.committer.date;
-                date = new Date(date).toLocaleDateString("en-US");
-                text.innerHTML += date;
-            });
-        }
-        else {
-            date = new Date(date).toLocaleDateString("en-US");
-            text.innerHTML += date;
-        }
-    });
+    if (text) {
 
+        fetch("https://api.github.com/repos/NicolasAPerez/NicolasAPerez.github.io/commits").then(res => {
+            if (res.ok) {
+                res.json().then(data => {
+                    date = data[0].commit.committer.date;
+                    date = new Date(date).toLocaleDateString("en-US");
+                    if (text) {
+                        text.innerHTML += date;
+                    }
+                });
+            } else {
+                date = new Date(date).toLocaleDateString("en-US");
+                if (text) {
+                    text.innerHTML += date;
+                }
+            }
+        });
+    }
 });
 
