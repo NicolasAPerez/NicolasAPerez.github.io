@@ -1,6 +1,6 @@
 import {default as mockOS} from "./WindowManager.js";
 import {default as Toolkit} from "./Toolkit.js";
-
+//Creates the various custom elements used for the MockOS
 class AppWindow extends HTMLElement{
     static observedAttributes = ["id", "name", "app-id","active-app", "selected-app", "z-index", "frame-events"]
     taskBarButton;
@@ -65,9 +65,14 @@ class AppWindow extends HTMLElement{
             left = Toolkit.clampNum(0, left, window.innerWidth - pane.offsetWidth);
             top = Toolkit.clampNum(0, top, window.innerHeight - pane.offsetHeight);
             this.shadowRoot.querySelector(".AppWindow").style.left = left + "px";
-            this.shadowRoot.querySelector(".AppWindow").style.top = top + "px"
+            this.shadowRoot.querySelector(".AppWindow").style.top = top + "px";
 
         }
+    }
+
+    resetWindowLocation(){
+        this.shadowRoot.querySelector(".AppWindow").style.left = "10px";
+        this.shadowRoot.querySelector(".AppWindow").style.top = "10px";
     }
 
     attachApp(){
@@ -221,7 +226,6 @@ class Shortcut extends HTMLElement{
 
     }
     connectedCallback(){
-        this.shadowRoot.querySelector(".Shortcut").addEventListener("click", this.openMockWindow.bind(this));
     }
 
     attributeChangedCallback(name, oldValue, newValue){
@@ -234,6 +238,14 @@ class Shortcut extends HTMLElement{
                 this.app_id = parseInt(newValue);
                 if (this.app_id || this.app_id === 0) {
                     this.shadowRoot.querySelector(".ShortcutIcon").src = mockOS.getIcon(this.app_id);
+                    let potentialFunc = mockOS.getCommandFunction(this.app_id);
+                    if (potentialFunc){
+                        this.shadowRoot.querySelector(".Shortcut").addEventListener("click", potentialFunc.bind(this));
+                    }
+                    else {
+                        this.shadowRoot.querySelector(".Shortcut").addEventListener("click", this.openMockWindow.bind(this));
+                    }
+
                 }
                 break;
         }

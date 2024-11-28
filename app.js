@@ -3,6 +3,10 @@ import windowManager, {default as mockOS} from "./WindowManager.js";
 
 
 function insertApps(){
+    mockOS.insertAppData("Reset Windows", "ArrowSwirl.png", "", mockOS.resetWindowLocations);
+    mockOS.insertAppData("Source Code Hyperlink", "SourceCode.png", "", function () {
+        window.location.href = "https://github.com/NicolasAPerez/NicolasAPerez.github.io";
+    })
     mockOS.insertAppData("About Me", "AboutMe.png", "AboutMe.html");
     mockOS.insertAppData("Contact Me", "ContactMe.png", "ContactMe.html");
     mockOS.insertAppData("CV", "Resume.png", "NAP_CV_Internet.pdf");

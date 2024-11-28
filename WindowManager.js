@@ -10,12 +10,18 @@ mockOS.imageLocation = "";
 mockOS.appLocation = "";
 
 
-mockOS.insertAppData = function (name, image, app){
+//Generic insert for locations of data, name, and image files
+//Command function available for Apps that do not want to open an App-Window element
+//Could theoretically implement similarly with type checks and putting functions in the app property
+//But I prefer to keep types static if possible
+mockOS.insertAppData = function (name, image, app, commandFunction = null){
     let id = mockOS.appFileData.size;
-    mockOS.appFileData.set(id, {app_id: id,  name: name, img: image, app: app});
+    mockOS.appFileData.set(id, {app_id: id,  name: name, img: image, app: app, commandFunction: commandFunction});
     return mockOS.appFileData.get(id);
 }
 
+//Creates Shortcut elements based on current AppFileData list and adds them to ShortcutContainer
+//TODO: Delete Shortcuts on call to allow for refreshes with additional items in list
 mockOS.insertShortcuts = function (){
     mockOS.appFileData.forEach( (app) => {
         let shortcut = document.createElement("window-shortcut");
@@ -27,6 +33,7 @@ mockOS.insertShortcuts = function (){
     });
 }
 
+//Handles updating the clock for the taskbar
 mockOS.updateClock = function (element){
     mockOS.date = new Date();
     let hour = mockOS.date.getHours().toLocaleString('en-us', {minimumIntegerDigits: 2});
@@ -35,6 +42,7 @@ mockOS.updateClock = function (element){
     element.innerHTML = `<b>${mockOS.date.getMonth()}/${mockOS.date.getDate()}/${mockOS.date.getFullYear()} <br> ${hour}:${min}:${sec} <br> Version ${mockOS.version} </b> `;
 }
 
+//Reorganizes the currently open windows and pushes TopApp to the front if not null
 mockOS.reorgZIndex = function (topApp = null){
     if (mockOS.z_Stack.at(mockOS.z_Stack.length-1) !== topApp) {
         mockOS.z_Stack.splice(mockOS.z_Stack.indexOf(topApp), 1);
@@ -49,6 +57,13 @@ mockOS.reorgZIndex = function (topApp = null){
     }
 }
 
+mockOS.resetWindowLocations = function (){
+    mockOS.appWindows.forEach( (app) => {
+        app.resetWindowLocation();
+    });
+}
+
+//Handles the MouseUp event used in "Window Dragging" functionality
 mockOS.addWindowMouseUpEvent = function () {
     document.addEventListener("mouseup", (event) => {
         if (mockOS.movingWindow) {
@@ -65,12 +80,12 @@ mockOS.addWindowMouseUpEvent = function () {
 }
 
 
-
+//Returns the file location of the requested App's icon
 mockOS.getIcon = function (appID){
     return `${mockOS.imageLocation}${mockOS.appFileData.get(appID).img}`;
 }
 
-//Use if not using iframes to display images
+//Returns an element of the App's data based on it's type
 mockOS.getAppHTML = function (appID){
     let appFile = `${mockOS.appLocation}${mockOS.appFileData.get(appID).app}`;
     let extension = appFile.split('.').pop();
@@ -92,10 +107,15 @@ mockOS.getAppHTML = function (appID){
     }
 
     return AppHTML;
-
 }
 
+mockOS.getCommandFunction = function (appID){
+    return mockOS.appFileData.get(appID).commandFunction;
+}
 
+//Startup function, sets useful variables like various file locations,
+//CALL THIS BEFORE USE
+//TODO: Potentially move this to be a constructor and remake as a class?
 mockOS.startup = function (shortcutContainer, windowContainer, taskbarContainer, imageLocation = "", appLocation = ""){
     mockOS.shortcutContainer = shortcutContainer;
     mockOS.windowContainer = windowContainer;
