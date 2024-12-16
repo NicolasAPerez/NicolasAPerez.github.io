@@ -1,15 +1,15 @@
 /* Normal view page CSS */
 
 :root {
-    --web: #173d02;
-    --web_background: #062601;
+    --web: #ffffff;
+    --web_background: #012126;
     --web_border: #4b348a;
     --web_button: #937fbb;
     --web_button_highlight: #aa96d0;
     --web_button_shadow: #8675b6;
 
-    --text_color: white;
-    --text_shadow: black;
+    --text_color: #000000;
+    --text_shadow: #ffffff;
 }
 
 html, body, div, button {
@@ -29,6 +29,7 @@ html {
 body {
 
     background-color: var(--web_background);
+    background-attachment: fixed;
 
 
 }
@@ -97,18 +98,36 @@ a.QuickBarButton {
 
 /* Content Values */
 
-div.content {
+div.Content {
     margin: auto;
     width: 90%;
     padding: 1vmin;
-    background-color: #355d03;
+    background-color: var(--web);
+    border-color: rebeccapurple;
+    border-image: linear-gradient(orangered 33% ,rebeccapurple 66%, black 100%) 10%;
+    border-width: 10px;
+    border-style: solid;
     justify-items: center;
 }
+img.Display {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    vertical-align: bottom;
+
+}
+
+div.ContentSpacer{
+    border-left: solid black 5px;
+    border-image: linear-gradient(rgba(0,0,0,0) 5%,black 50%,rgba(0,0,0,0) 95%) 3%;
+}
+
 div.MultiContent{
     display: flex;
     flex-direction: row;
-
 }
 div.MultiContent > *{
-    flex: 1;
+    flex-grow: 1;
+    margin-left: 5px;
+    margin-right: 5px;
 }
