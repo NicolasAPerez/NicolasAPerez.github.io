@@ -131,3 +131,7 @@ div.MultiContent > *{
     margin-left: 5px;
     margin-right: 5px;
 }
+
+div.Long div{
+    padding-top: 20px;
+}

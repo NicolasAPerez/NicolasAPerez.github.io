@@ -9,6 +9,7 @@ function insertApps(){
     })
     mockOS.insertAppData("About Me", "AboutMe.png", "AboutMe.html");
     mockOS.insertAppData("Contact Me", "ContactMe.png", "ContactMe.html");
+    mockOS.insertAppData("Projects","Projects.png","MyProjects.html")
     mockOS.insertAppData("CV", "Resume.png", "NAP_CV_Internet.pdf");
     mockOS.insertAppData("Minesweeper", "Minesweeper.png", "Minesweeper/index.html");
     mockOS.insertAppData("Spellbound Demo", "Spellbound.png","SpellboundDEMO/index.html");
@@ -26,7 +27,7 @@ document.addEventListener("DOMContentLoaded", (event)=>{
     mockOS.insertShortcuts();
 
     let text = document.getElementById("openOSAlert");
-    let date = "2024-11-19"; //Fallback
+    let date = "2025-1-25"; //Fallback
     if (text) {
 
         fetch("https://api.github.com/repos/NicolasAPerez/NicolasAPerez.github.io/commits").then(res => {
