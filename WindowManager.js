@@ -39,7 +39,7 @@ mockOS.updateClock = function (element){
     let hour = mockOS.date.getHours().toLocaleString('en-us', {minimumIntegerDigits: 2});
     let min = mockOS.date.getMinutes().toLocaleString('en-us', {minimumIntegerDigits: 2});
     let sec = mockOS.date.getSeconds().toLocaleString('en-us', {minimumIntegerDigits: 2})
-    element.innerHTML = `<b>${mockOS.date.getMonth()}/${mockOS.date.getDate()}/${mockOS.date.getFullYear()} <br> ${hour}:${min}:${sec} <br> Version ${mockOS.version} </b> `;
+    element.innerHTML = `<b>${mockOS.date.getMonth() + 1}/${mockOS.date.getDate()}/${mockOS.date.getFullYear()} <br> ${hour}:${min}:${sec} <br> Version ${mockOS.version} </b> `;
 }
 
 //Reorganizes the currently open windows and pushes TopApp to the front if not null
