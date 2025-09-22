@@ -49,3 +49,4 @@ document.addEventListener("DOMContentLoaded", (event)=>{
     }
 });
 
+//TODO: Relative links (ex. .../AboutMe) starting the site with said window open.

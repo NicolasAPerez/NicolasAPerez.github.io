@@ -1,0 +1,15 @@
+html, body, div, button {
+    margin: 0;
+    border-width: 0;
+}
+
+div#setpiece{
+    height: 80vw;
+    width: 80vw;
+    padding-left: 10px;
+}
+
+canvas{
+    height: 100%;
+    width: 100%;
+}
